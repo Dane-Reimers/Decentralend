@@ -38,16 +38,20 @@ class App extends Component {
   render() {
     return (
       <HashRouter>
+        <head>
+        <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet"/>
+        </head>
         <div>
-          <body className="header">
+          <div className="header">
             <img src={logo} alt="Decentralized" className="logo"/>
-            <body className="nav">
-              <NavLink to="/home">Home</NavLink>
+            <div style={{flexGrow:1}}></div>
+            <div className="navBar">
+            <NavLink to="/home">Home</NavLink>
               <NavLink to="/create-circle">Create Circle</NavLink>
               <NavLink to="/ViewGroup">View G</NavLink>
               <NavLink to="/profile">Profile</NavLink>
-            </body>
-          </body>
+            </div>
+          </div>
           <div className="content">
             <Route exact path="/home" render={props =>
                 <Home numGroups={this.state.numGroups} {...props} />
