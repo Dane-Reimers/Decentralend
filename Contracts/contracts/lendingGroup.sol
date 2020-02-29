@@ -17,9 +17,9 @@ contract lendingGroup {
     uint amountRequested
   );
 
-  constructor(string memory _name) public {
+  constructor(string memory _name, address _owner) public {
     name = _name;
-    owner = msg.sender;
+    owner = _owner;
   }
 
   function addMember (address member) public {
