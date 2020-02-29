@@ -24,6 +24,18 @@
   color: white;
 }
 
+.button {
+  background-color: #282c34;
+  border: 1px solid black;
+  color: #60a8a0;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 .logo {
   margin: 1em;
   height: 10em;
