@@ -42,11 +42,16 @@ contract LendingGroup {
   }
 
   function giveMoney (address member) public payable {
-    if ((requests[member].totalFulfilled + msg.value) >= requests[member].requested) {
-      payOut(...);
+    address payable memberPayable = address (uint160(member));
+    if ((requests[member].totalFulfilled + msg.value * 1000) >= requests[member].requested) {
+      payOut(memberPayable);
     }
 
     requests[member].totalFulfilled += msg.value;
-    members[msg.sender].balance += msg.value;
+    members[msg.sender].balance += int256(msg.value);
+  }
+
+  function payOut (address payable member) private {
+    member.transfer((requests[member].requested) / 1000);
   }
 }
