@@ -10,6 +10,7 @@ import { LENDING_GROUP_MANAGER_ABI, LENDING_GROUP_MANAGER_ADDRESS } from './conf
 import Home from './Home';
 import CreateCircle from './CreateCircle';
 import logo from './full_logo.png';
+import ViewProfile from './ViewProfile';
 
 class App extends Component {
   componentDidMount() {
@@ -41,6 +42,7 @@ class App extends Component {
             <body className="nav">
               <NavLink to="/home">Home</NavLink>
               <NavLink to="/create-circle">Create Circle</NavLink>
+              <NavLink to="/profile">Profile</NavLink>
             </body>
           </body>
           <div className="content">
@@ -50,6 +52,10 @@ class App extends Component {
             />
             <Route exact path="/create-circle" render={props =>
                 <CreateCircle lendingGroupManager={this.state.lendingGroupManager} account={this.state.account} {...props} />
+              }
+            />
+            <Route exact path="/profile" render={props =>
+                <ViewProfile lendingGroupManager={this.state.lendingGroupManager} web3={this.state.web3} account={this.state.account} {...props} />
               }
             />
           </div>
