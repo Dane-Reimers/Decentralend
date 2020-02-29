@@ -12,13 +12,13 @@ contract LendingGroupManager {
     groups[numGroups] = newGroup;
   }
 
-  function getNumGroups() public
+  function getNumGroups() public view
     returns (uint)
   {
       return numGroups;
   }
 
-  function getGroup(uint id) public
+  function getGroup(uint id) public view
     returns (LendingGroup)
   {
     return groups[id];

@@ -33,8 +33,7 @@ contract LendingGroup {
       return (request.requested, request.totalFulfilled);
   }
 
-  function addMember (address _memberAddress, string memory _name,
-                      string memory phoneNumber, string memory physAddress) public {
+  function addMember (address _memberAddress, string memory _name) public {
     memberAddress.push(_memberAddress);
     members[_memberAddress] = Member(_name, 0);
     requests[_memberAddress] = Request(0, 0);
@@ -67,6 +66,7 @@ contract LendingGroup {
   }
 
   function pay(address payable receiver, uint256 amt) private {
+    members[receiver].balance -= int256(amt);
     receiver.transfer(amt);
   }  
 }
