@@ -6,8 +6,8 @@ contract LendingGroupManager {
   uint numGroups;
   mapping(uint => LendingGroup) groups;
 
-  function createGroup(string memory name) public {
-    LendingGroup newGroup = new LendingGroup(name, msg.sender);
+  function createGroup(string memory groupName, string memory ownerName) public {
+    LendingGroup newGroup = new LendingGroup(groupName, ownerName, msg.sender);
     numGroups += 1;
     groups[numGroups] = newGroup;
   }

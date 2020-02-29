@@ -71,7 +71,7 @@ class ViewGroup extends Component {
             <h2>Group</h2>
             <h3>Your group name is: ____</h3>
             <div>
-                
+
             </div>
         </div>
         );

@@ -15,7 +15,7 @@ import ViewProfile from './ViewProfile';
 
 class App extends Component {
   componentDidMount() {
-    this.loadBlockchainData()
+    this.loadBlockchainData();
   }
 
   async loadBlockchainData() {
@@ -41,29 +41,24 @@ class App extends Component {
         <head>
         <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet"/>
         </head>
-        <div>
-          <div className="header">
+        <div >
+          <div className="header" id="Header">
             <img src={logo} alt="Decentralized" className="logo"/>
             <div style={{flexGrow:1}}></div>
             <div className="navBar">
-            <NavLink to="/home">Home</NavLink>
-              <NavLink to="/create-circle">Create Circle</NavLink>
-              <NavLink to="/ViewGroup">View G</NavLink>
-              <NavLink to="/profile">Profile</NavLink>
+              <NavLink className="nav" to="/">Home</NavLink>
+              <NavLink className="nav" to="/create-circle">Create Circle</NavLink>
+              <NavLink className="nav" to="/profile">Profile</NavLink>
             </div>
           </div>
           <div className="content">
-            <Route exact path="/home" render={props =>
+            <Route exact path="/" render={props =>
                 <Home numGroups={this.state.numGroups} {...props} />
               }
             />
             <Route exact path="/create-circle" render={props =>
                 <CreateCircle lendingGroupManager={this.state.lendingGroupManager} account={this.state.account} {...props} />
               }
-            />
-            <Route exact path="/ViewGroup" render={props =>
-              <ViewGroup group={this.state.lendingGroup}{...props} />
-            } 
             />
             <Route exact path="/profile" render={props =>
                 <ViewProfile lendingGroupManager={this.state.lendingGroupManager} web3={this.state.web3} account={this.state.account} {...props} />

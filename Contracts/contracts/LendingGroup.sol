@@ -23,10 +23,10 @@ contract LendingGroup {
     uint amountRequested
   );
 
-  constructor(string memory _name, address _owner) public {
-    name = _name;
+  constructor(string memory _groupName, string memory _ownerName, address _owner) public {
+    name = _groupName;
     owner = _owner;
-    members[msg.sender] = Member("owner", 0);
+    members[_owner] = Member(_ownerName, 0);
   }
 
   function getRequest(address member) public view returns (uint256, uint256) {

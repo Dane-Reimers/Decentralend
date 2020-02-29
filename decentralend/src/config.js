@@ -1,4 +1,4 @@
-export const LENDING_GROUP_MANAGER_ADDRESS = "0x6A0aAC946ff3A14B7070bf65A48127f9840Baf62"
+export const LENDING_GROUP_MANAGER_ADDRESS = "0xE8Fb5EbE671e0fFF09B3E844Fd682531C1CF8414"
 
 export const LENDING_GROUP_MANAGER_ABI = [
     {
@@ -6,7 +6,12 @@ export const LENDING_GROUP_MANAGER_ABI = [
       "inputs": [
         {
           "internalType": "string",
-          "name": "name",
+          "name": "groupName",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "ownerName",
           "type": "string"
         }
       ],
@@ -59,7 +64,12 @@ export const LENDING_GROUP_ABI = [
       "inputs": [
         {
           "internalType": "string",
-          "name": "_name",
+          "name": "_groupName",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "_ownerName",
           "type": "string"
         },
         {
