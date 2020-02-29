@@ -19,10 +19,11 @@ class App extends Component {
     const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
-    const electionManager = new web3.eth.Contract(ELECTION_MANAGER_ABI, ELECTION_MANAGER_ADDRESS)
+    //const electionManager = new web3.eth.Contract(ELECTION_MANAGER_ABI, ELECTION_MANAGER_ADDRESS)
+    const electionManager = null
     this.setState({ electionManager })
-    let numElections = await electionManager.methods.getNumElections().call()
-    numElections = [] 
+    //const numElections = await electionManager.methods.getNumElections().call()
+    const numElections = [] 
     this.setState({ numElections })
   }
 

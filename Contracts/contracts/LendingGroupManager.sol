@@ -4,7 +4,7 @@ import './LendingGroup.sol';
 
 contract LendingGroupManager {
   uint numGroups;
-  mapping(uint => LendingGrouptr) groups;
+  mapping(uint => LendingGroup) groups;
 
   function createGroup(string memory name) public {
     LendingGroup newGroup = new LendingGroup(name, msg.sender);
@@ -13,13 +13,13 @@ contract LendingGroupManager {
   }
 
   function getNumGroups() public
-    returns (int)
+    returns (uint)
   {
       return numGroups;
   }
 
-  function getGroup(int id) public
-    returns (address)
+  function getGroup(uint id) public
+    returns (LendingGroup)
   {
     return groups[id];
   }
