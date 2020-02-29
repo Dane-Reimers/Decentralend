@@ -33,6 +33,10 @@ contract LendingGroup {
       return (request.requested, request.totalFulfilled);
   }
 
+  function memberInGroup(address questionable) public view returns (bool) {
+    return bytes(members[questionable].name).length > 0;
+  }
+
   function addMember (address _memberAddress, string memory _name) public {
     memberAddress.push(_memberAddress);
     members[_memberAddress] = Member(_name, 0);
