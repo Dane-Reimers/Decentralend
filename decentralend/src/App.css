@@ -24,6 +24,26 @@
   color: white;
 }
 
+.logo {
+  margin: 1em;
+}
+
+.nav {
+  margin: 1em;
+}
+
+.header {
+  background-color: #60a8a0;
+  height: 15vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-family: interstate, sans-serif;
+  font-style: normal;
+  font-weight: 100;
+  font-size: calc(18px + 2vmin)
+}
+
 .App-link {
   color: #61dafb;
 }
