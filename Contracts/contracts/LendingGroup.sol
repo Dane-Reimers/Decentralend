@@ -5,7 +5,7 @@ contract LendingGroup {
 
   struct Request {
     uint requested;
-    int totalFulfilled;
+    uint totalFulfilled;
   }
 
   struct Member {
@@ -41,14 +41,12 @@ contract LendingGroup {
     requests[msg.sender] = Request(amount * 1000, 0);
   }
 
-  function giveMoney (address member, int amountDonated) public payable {
-     require(
-      IERC20Token(circle.tokenAddress).transferFrom(
-        msg.sender,
-        address(this),
-        amountDonated
-      ),
-      "Transfer of contribution failed"
-    );
+  function giveMoney (address member) public payable {
+    if ((requests[member].totalFulfilled + msg.value) >= requests[member].requested) {
+      payOut(...);
+    }
+
+    requests[member].totalFulfilled += msg.value;
+    members[msg.sender].balance += msg.value;
   }
 }
