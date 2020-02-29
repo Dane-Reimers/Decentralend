@@ -3,22 +3,27 @@ import React, { Component } from "react";
 class CreateCircle extends Component {
   constructor(props) {
     super(props);
-    this.state = { loading: false };
+    this.state = {
+      username: "",
+      groupName: "",
+      loading: false
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(event) {
-    this.setState({groupName: event.target.value})
+    this.setState({[event.target.name]: event.target.value})
   }
 
   async handleSubmit(event) {
-    console.log(this.props.account)
     this.state.loading = true
-    this.props.lendingGroupManager.methods.createGroup(this.state.groupName).send({ from: this.props.account, gas: 1000000})
+    this.props.lendingGroupManager.methods.createGroup(this.state.groupName, this.state.username)
+    .send({ from: this.props.account, gas: 1000000})
     .once('receipt', (receipt) => {
       console.log(receipt)
+      this.setState({groupName: "", username: ""})
       this.state.loading = false
     })
     event.preventDefault()
@@ -28,11 +33,21 @@ class CreateCircle extends Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <label>
-          Name:
+          Group Name:
           <br/>
-          <input type="text" value={this.state.groupName || ""} onChange={this.handleChange} />
+          <input name="groupName" type="text" value={this.state.groupName} onChange={this.handleChange}/>
         </label>
-        <input type="submit" value="Submit" />
+        <br/>
+        <br/>
+
+        <label>
+          Your Name:
+          <br/>
+          <input name="username" type="text" value={this.state.username} onChange={this.handleChange}/>
+        </label>
+        <br/>
+
+        <input type="submit" value="Submit"/>
       </form>
     );
   }

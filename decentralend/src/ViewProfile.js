@@ -29,6 +29,7 @@ class Home extends Component {
     const inGroup = await group.methods.memberInGroup(this.props.account).call()
     if (inGroup) {
       this.groups.push(group)
+      console.log(group)
     }
   }
 
@@ -39,7 +40,7 @@ class Home extends Component {
         <h3>Your account number is: { this.props.account }</h3>
         <div>
           {this.groups.map((group, index) => (
-            <p>group</p>
+            <p>{{ group }}</p>
           ))}
         </div>
       </div>
