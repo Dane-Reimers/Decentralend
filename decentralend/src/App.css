@@ -26,12 +26,21 @@
 
 .logo {
   margin: 1em;
+  margin-top: 1.1em;
   height: 10em;
   width: 10em;
 }
 
-.nav {
+.navBar {
   margin: 1em;
+  margin-top: 1.5em;
+}
+
+.nav {
+  padding:0.5em;
+  text-decoration: none;
+  color: #60a8a0;
+  font-size: 4vmin;
 }
 
 .header {
@@ -41,10 +50,39 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-family: interstate, sans-serif;
+  font-family: Arvo, sans-serif;
   font-style: normal;
   font-weight: 100;
-  font-size: calc(18px + 2vmin)
+  font-size: 5vmin;
+}
+
+.backgroundImg {
+  width: 100%;
+  grid-area: 1 / 1 / 12 / 10;
+}
+
+.background {
+  margin-top: 0.5em;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.overlap { 
+  color:white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-size: 10vmin;
+  text-align: center;
+  grid-area: 4 / 2 / 5 / 5;
+}
+.overlap2 { 
+  color:white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-size: 5vmin;
+  text-align: center;
+  grid-area: 5 / 2 / 6 / 5;
 }
 
 .App-link {
