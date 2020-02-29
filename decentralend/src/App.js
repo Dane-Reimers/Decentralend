@@ -18,7 +18,6 @@ class App extends Component {
     this.loadBlockchainData();
   }
 
-
   async loadBlockchainData() {
     //const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const web3 = new Web3("http://localhost:8545")
@@ -47,13 +46,13 @@ class App extends Component {
             <img src={logo} alt="Decentralized" className="logo"/>
             <div style={{flexGrow:1}}></div>
             <div className="navBar">
-              <NavLink className="nav" to="/home">Home</NavLink>
+              <NavLink className="nav" to="/">Home</NavLink>
               <NavLink className="nav" to="/create-circle">Create Circle</NavLink>
               <NavLink className="nav" to="/profile">Profile</NavLink>
             </div>
           </div>
           <div className="content">
-            <Route exact path="/home" render={props =>
+            <Route exact path="/" render={props =>
                 <Home numGroups={this.state.numGroups} {...props} />
               }
             />
