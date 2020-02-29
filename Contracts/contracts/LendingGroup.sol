@@ -28,6 +28,11 @@ contract LendingGroup {
     owner = _owner;
   }
 
+  function getRequest(address member) public view returns (uint256, uint256) {
+      Request memory request = requests[member];
+      return (request.requested, request.totalFulfilled);
+  }
+
   function addMember (address _memberAddress, string memory _name,
                       string memory phoneNumber, string memory physAddress) public {
     memberAddress.push(_memberAddress);
