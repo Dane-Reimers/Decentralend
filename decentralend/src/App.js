@@ -35,13 +35,13 @@ class App extends Component {
     return (
       <HashRouter>
         <div>
-          <div className="header">
-            <img className="logo" src="/images/full_logo.png" alt="Decentralend"></img>
-            <div className="nav">
+          <body className="header">
+            <img src="full_logo.png" alt="Decentralend" className="logo" ></img>
+            <body className="nav">
               <NavLink to="/home">Home</NavLink>
               <NavLink to="/create-circle">Create Circle</NavLink>
-            </div>
-          </div>
+            </body>
+          </body>
           <div className="content">
             <Route exact path="/home" render={props =>
                 <Home numGroups={this.state.numGroups} {...props} />

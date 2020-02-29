@@ -26,6 +26,7 @@
 
 .logo {
   margin: 1em;
+  size: 100;
 }
 
 .nav {
@@ -37,7 +38,8 @@
 }
 
 .header {
-  background-color: #60a8a0;
+  background-color: white;
+  color: #60a8a0;
   height: 15vh;
   display: flex;
   flex-direction: row;
