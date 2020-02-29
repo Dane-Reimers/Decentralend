@@ -1,42 +1,50 @@
 import React, { Component } from "react";
+import Web3 from 'web3';
+import { LENDING_GROUP_ABI } from "./config";
  
-class ViewProfile extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = { address: 0 };
-    this.state = { loading: false };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.groups = []
   }
 
-  handleChange(event) {
-    this.setState({electionName: event.target.value});
+  componentWillUpdate() {
+    if (this.props.lendingGroupManager != undefined &&
+        this.props.account != undefined)
+    {
+      this.setGroups()
+    }
   }
 
-  async handleSubmit(event) {
-    console.log(this.props.account)
-    this.setState({ loading: true })
-    this.props.electionManager.methods.createElection(this.state.electionName).send({ from: this.props.account })
-    .once('receipt', (receipt) => {
-      console.log(receipt)
-      this.setState({ loading: false })
-    })
-    event.preventDefault();
+  async setGroups() {
+    const numGroups = await this.props.lendingGroupManager.methods.getNumGroups().call()
+    for (let id = 1; id <= numGroups; id++) {
+      this.checkIfInGroup(id)
+    }
+  }
+
+  async checkIfInGroup(id) {
+    const groupAddress = await this.props.lendingGroupManager.methods.getGroup(id).call()
+    const group = new this.props.web3.eth.Contract(LENDING_GROUP_ABI, groupAddress)
+    const inGroup = await group.methods.memberInGroup(this.props.account).call()
+    if (inGroup) {
+      this.groups.push(group)
+    }
   }
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <br/>
-          <input type="text" value={this.state.electionName} onChange={this.handleChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <div>
+        <h2>Profile</h2>
+        <h3>Your account number is: { this.props.account }</h3>
+        <div>
+          {this.groups.map((group, index) => (
+            <p>group</p>
+          ))}
+        </div>
+      </div>
     );
   }
 }
  
-export default CreateCircle;
+export default Home;

@@ -26,11 +26,16 @@ contract LendingGroup {
   constructor(string memory _name, address _owner) public {
     name = _name;
     owner = _owner;
+    members[msg.sender] = Member("owner", 0);
   }
 
   function getRequest(address member) public view returns (uint256, uint256) {
       Request memory request = requests[member];
       return (request.requested, request.totalFulfilled);
+  }
+
+  function memberInGroup(address questionable) public view returns (bool) {
+    return bytes(members[questionable].name).length > 0;
   }
 
   function addMember (address _memberAddress, string memory _name) public {

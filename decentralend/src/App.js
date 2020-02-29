@@ -9,7 +9,9 @@ import './App.css';
 import { LENDING_GROUP_MANAGER_ABI, LENDING_GROUP_MANAGER_ADDRESS } from './config';
 import Home from './Home';
 import CreateCircle from './CreateCircle';
+import ViewGroup from './ViewGroup';
 import logo from './full_logo.png';
+import ViewProfile from './ViewProfile';
 
 class App extends Component {
   componentDidMount() {
@@ -19,6 +21,7 @@ class App extends Component {
   async loadBlockchainData() {
     //const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const web3 = new Web3("http://localhost:8545")
+    this.setState({ web3 })
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
     const lendingGroupManager= new web3.eth.Contract(LENDING_GROUP_MANAGER_ABI, LENDING_GROUP_MANAGER_ADDRESS)
@@ -43,8 +46,10 @@ class App extends Component {
             <img src={logo} alt="Decentralized" className="logo"/>
             <div style={{flexGrow:1}}></div>
             <div className="navBar">
-              <NavLink className="nav" to="/home">About</NavLink>
-              <NavLink className="nav" to="/create-circle">Create Circle</NavLink>
+            <NavLink to="/home">Home</NavLink>
+              <NavLink to="/create-circle">Create Circle</NavLink>
+              <NavLink to="/ViewGroup">View G</NavLink>
+              <NavLink to="/profile">Profile</NavLink>
             </div>
           </div>
           <div className="content">
@@ -54,6 +59,14 @@ class App extends Component {
             />
             <Route exact path="/create-circle" render={props =>
                 <CreateCircle lendingGroupManager={this.state.lendingGroupManager} account={this.state.account} {...props} />
+              }
+            />
+            <Route exact path="/ViewGroup" render={props =>
+              <ViewGroup group={this.state.lendingGroup}{...props} />
+            } 
+            />
+            <Route exact path="/profile" render={props =>
+                <ViewProfile lendingGroupManager={this.state.lendingGroupManager} web3={this.state.web3} account={this.state.account} {...props} />
               }
             />
           </div>
