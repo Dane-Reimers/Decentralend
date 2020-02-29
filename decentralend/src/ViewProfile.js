@@ -7,13 +7,16 @@ class Home extends Component {
     super(props);
     this.groups = []
   }
-  
-  componentDidUpdate() {
-    this.setGroups()
+
+  componentWillUpdate() {
+    if (this.props.lendingGroupManager != undefined &&
+        this.props.account != undefined)
+    {
+      this.setGroups()
+    }
   }
 
   async setGroups() {
-    await this.props.lendingGroupManager
     const numGroups = await this.props.lendingGroupManager.methods.getNumGroups().call()
     for (let id = 1; id <= numGroups; id++) {
       this.checkIfInGroup(id)
@@ -23,10 +26,9 @@ class Home extends Component {
   async checkIfInGroup(id) {
     const groupAddress = await this.props.lendingGroupManager.methods.getGroup(id).call()
     const group = new this.props.web3.eth.Contract(LENDING_GROUP_ABI, groupAddress)
-    const inGroup = await group.methods.memberInGroup().call()
+    const inGroup = await group.methods.memberInGroup(this.props.account).call()
     if (inGroup) {
       this.groups.push(group)
-      console.log(group)
     }
   }
 
