@@ -11,6 +11,7 @@ import Home from './Home';
 import CreateCircle from './CreateCircle';
 import ViewGroup from './ViewGroup';
 import logo from './full_logo.png';
+import ViewProfile from './ViewProfile';
 
 class App extends Component {
   componentDidMount() {
@@ -20,6 +21,7 @@ class App extends Component {
   async loadBlockchainData() {
     //const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
     const web3 = new Web3("http://localhost:8545")
+    this.setState({ web3 })
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
     const lendingGroupManager= new web3.eth.Contract(LENDING_GROUP_MANAGER_ABI, LENDING_GROUP_MANAGER_ADDRESS)
@@ -43,6 +45,7 @@ class App extends Component {
               <NavLink to="/home">Home</NavLink>
               <NavLink to="/create-circle">Create Circle</NavLink>
               <NavLink to="/ViewGroup">View G</NavLink>
+              <NavLink to="/profile">Profile</NavLink>
             </body>
           </body>
           <div className="content">
@@ -56,7 +59,11 @@ class App extends Component {
             />
             <Route exact path="/ViewGroup" render={props =>
               <ViewGroup group={this.state.lendingGroup}{...props} />
-            }
+            } 
+            />
+            <Route exact path="/profile" render={props =>
+                <ViewProfile lendingGroupManager={this.state.lendingGroupManager} web3={this.state.web3} account={this.state.account} {...props} />
+              }
             />
           </div>
         </div>
