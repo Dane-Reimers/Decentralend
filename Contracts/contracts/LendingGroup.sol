@@ -13,8 +13,8 @@ contract LendingGroup {
     int balance;
   }
 
-  string name;
-  address owner;
+  string public name;
+  address public owner;
   address[] memberAddress;
   mapping (address => Member) members;
   mapping (address => Request) requests;

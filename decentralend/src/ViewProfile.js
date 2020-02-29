@@ -24,18 +24,19 @@ class Home extends Component {
   async setGroups() {
     const numGroups = await this.props.lendingGroupManager.methods.getNumGroups().call()
     for (let id = 1; id <= numGroups; id++) {
-      const inGroup = await this.inGroup(id)
+      const groupAddress = await this.props.lendingGroupManager.methods.getGroup(id).call()
+      const group = new this.props.web3.eth.Contract(LENDING_GROUP_ABI, groupAddress)
+      const inGroup = await this.inGroup(group)
       if (inGroup) {
-        const group = await this.props.lendingGroupManager.methods.getGroup(id).call()
+        const groupName = await group.name()
+        group.name = groupName
         const prevGroups = this.state.groups
         this.setState({groups: [...prevGroups, group]})
       }
     }
   }
 
-  async inGroup(id) {
-    const groupAddress = await this.props.lendingGroupManager.methods.getGroup(id).call()
-    const group = new this.props.web3.eth.Contract(LENDING_GROUP_ABI, groupAddress)
+  async inGroup(group) {
     const inGroup = await group.methods.memberInGroup(this.props.account).call()
     return inGroup
   }
@@ -47,7 +48,7 @@ class Home extends Component {
         <h3>Your account number is: { this.props.account }</h3>
         <div>
           {this.state.groups.map(function(group, idx){
-          return (<div key={idx}>{group}</div>)
+          return (<div key={idx}>{group._address}</div>)
           })}
         </div>
       </div>
