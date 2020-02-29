@@ -30,11 +30,11 @@ contract LendingGroup {
     owner = _owner;
   }
 
-  function addMember (address _memberAddress, string memory name,
+  function addMember (address _memberAddress, string memory memberName,
                       string memory phoneNumber, string memory physAddress) public {
     memberAddress.push(_memberAddress);
     members[_memberAddress] = Member(
-            name,
+            memberName,
             physAddress,
             phoneNumber
     );
