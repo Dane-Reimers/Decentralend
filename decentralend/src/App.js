@@ -15,8 +15,9 @@ import ViewProfile from './ViewProfile';
 
 class App extends Component {
   componentDidMount() {
-    this.loadBlockchainData()
+    this.loadBlockchainData();
   }
+
 
   async loadBlockchainData() {
     //const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
@@ -41,8 +42,8 @@ class App extends Component {
         <head>
         <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet"/>
         </head>
-        <div>
-          <div className="header">
+        <div >
+          <div className="header" id="Header">
             <img src={logo} alt="Decentralized" className="logo"/>
             <div style={{flexGrow:1}}></div>
             <div className="navBar">
