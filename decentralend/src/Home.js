@@ -6,7 +6,7 @@ class Home extends Component {
     return (
       <div>
         <div className="background">
-          <img src={background_img} className="backgroundImg"/>
+          <img src={background_img} alt="" className="backgroundImg"/>
           <div className="overlap">Peer to Peer Lending</div>
           <div className="overlap2">Removing Systemic Bias from Loans</div>
         </div>

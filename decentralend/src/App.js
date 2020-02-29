@@ -15,7 +15,7 @@ import ViewProfile from './ViewProfile';
 
 class App extends Component {
   componentDidMount() {
-    this.loadBlockchainData()
+    this.loadBlockchainData();
   }
 
   async loadBlockchainData() {
@@ -41,18 +41,18 @@ class App extends Component {
         <head>
         <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet"/>
         </head>
-        <div>
-          <div className="header">
+        <div >
+          <div className="header" id="Header">
             <img src={logo} alt="Decentralized" className="logo"/>
             <div style={{flexGrow:1}}></div>
             <div className="navBar">
-              <NavLink className="nav" to="/home">Home</NavLink>
+              <NavLink className="nav" to="/">Home</NavLink>
               <NavLink className="nav" to="/create-circle">Create Circle</NavLink>
               <NavLink className="nav" to="/profile">Profile</NavLink>
             </div>
           </div>
           <div className="content">
-            <Route exact path="/home" render={props =>
+            <Route exact path="/" render={props =>
                 <Home numGroups={this.state.numGroups} {...props} />
               }
             />
