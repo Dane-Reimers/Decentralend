@@ -23,6 +23,7 @@ class CreateCircle extends Component {
     .send({ from: this.props.account, gas: 1000000})
     .once('receipt', (receipt) => {
       console.log(receipt)
+      this.setState({groupName: "", username: ""})
       this.state.loading = false
     })
     event.preventDefault()
@@ -34,7 +35,7 @@ class CreateCircle extends Component {
         <label>
           Group Name:
           <br/>
-          <input name="groupName" type="text" onChange={this.handleChange}/>
+          <input name="groupName" type="text" value={this.state.groupName} onChange={this.handleChange}/>
         </label>
         <br/>
         <br/>
@@ -42,7 +43,7 @@ class CreateCircle extends Component {
         <label>
           Your Name:
           <br/>
-          <input name="username" type="text" onChange={this.handleChange}/>
+          <input name="username" type="text" value={this.state.username} onChange={this.handleChange}/>
         </label>
         <br/>
 
