@@ -17,7 +17,7 @@ class Home extends Component {
         !this.state.setGroupsCalled)
     {
       this.setState({setGroupsCalled: true})
-      this.setGroups().then(()=>console.log(this.state.groups))
+      this.setGroups()
     }
   }
 
