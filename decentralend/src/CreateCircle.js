@@ -3,7 +3,6 @@ import React, { Component } from "react";
 class CreateCircle extends Component {
   constructor(props) {
     super(props);
-    this.state = { electionName: '' };
     this.state = { loading: false };
 
     this.handleChange = this.handleChange.bind(this);
@@ -11,18 +10,18 @@ class CreateCircle extends Component {
   }
 
   handleChange(event) {
-    this.setState({electionName: event.target.value});
+    this.setState({groupName: event.target.value})
   }
 
   async handleSubmit(event) {
     console.log(this.props.account)
-    this.setState({ loading: true })
-    this.props.electionManager.methods.createElection(this.state.electionName).send({ from: this.props.account })
+    this.state.loading = true
+    this.props.lendingGroupManager.methods.createGroup(this.state.groupName).send({ from: this.props.account })
     .once('receipt', (receipt) => {
       console.log(receipt)
-      this.setState({ loading: false })
+      this.state.loading = false
     })
-    event.preventDefault();
+    event.preventDefault()
   }
 
   render() {
@@ -31,7 +30,7 @@ class CreateCircle extends Component {
         <label>
           Name:
           <br/>
-          <input type="text" value={this.state.electionName} onChange={this.handleChange} />
+          <input type="text" value={this.state.groupName || ""} onChange={this.handleChange} />
         </label>
         <input type="submit" value="Submit" />
       </form>
