@@ -1,15 +1,23 @@
-pragma solidity ^0.5.0;
+pragma solidity >=0.5.0;
 
 
-contract lendingGroup {
+contract LendingGroup {
+
   struct Request {
-    int requested;
+    uint requested;
     int totalFulfilled;
   }
 
-  address[] members;
+  struct Member {
+    string name;
+    string physAddress;
+    string phoneNumber;
+  }
+
   string name;
   address owner;
+  address[] memberAddress;
+  mapping (address => Member) members;
   mapping (address => int) balances;
   mapping (address => Request) requests;
 
@@ -22,11 +30,19 @@ contract lendingGroup {
     owner = msg.sender;
   }
 
-  function addMember (address member) public {
-    members.add(member);
-    balances[member] = 0;
-    requests[member] = Request(0, 0);
+  function addMember (address _memberAddress, string memory name,
+                      string memory phoneNumber, string memory physAddress) public {
+    memberAddress.push(_memberAddress);
+    members[_memberAddress] = Member(
+            name,
+            physAddress,
+            phoneNumber
+    );
+    balances[_memberAddress] = 0;
+    requests[_memberAddress] = Request(0, 0);
   }
 
-  function requestMoney ()
+  function requestMoney (uint amount) public {
+    requests[msg.sender] = Request(amount, 0);
+  }
 }
