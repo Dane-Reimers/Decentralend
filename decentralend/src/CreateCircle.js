@@ -16,7 +16,7 @@ class CreateCircle extends Component {
   async handleSubmit(event) {
     console.log(this.props.account)
     this.state.loading = true
-    this.props.lendingGroupManager.methods.createGroup(this.state.groupName).send({ from: this.props.account })
+    this.props.lendingGroupManager.methods.createGroup(this.state.groupName).send({ from: this.props.account, gas: 1000000})
     .once('receipt', (receipt) => {
       console.log(receipt)
       this.state.loading = false
