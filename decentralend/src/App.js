@@ -38,7 +38,7 @@ class App extends Component {
           <h1>Decentralend</h1>
           <ul className="header">
             <li><NavLink to="/home">Home</NavLink></li>
-            <li><NavLink to="/create-circle">Create Circle</NavLink></li>
+            <li><NavLink to="/create-circle">Create Group</NavLink></li>
           </ul>
           <div className="content">
             <Route exact path="/home" render={props =>
