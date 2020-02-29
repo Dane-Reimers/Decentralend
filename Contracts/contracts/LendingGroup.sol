@@ -48,15 +48,25 @@ contract LendingGroup {
 
   function giveMoney (address member) public payable {
     address payable memberPayable = address (uint160(member));
-    if ((requests[member].totalFulfilled + msg.value * 1000) >= requests[member].requested) {
-      payOut(memberPayable);
-    }
-
+    address payable payee = address (uint160(msg.sender));
     requests[member].totalFulfilled += msg.value;
     members[msg.sender].balance += int256(msg.value);
+
+    if (requests[member].totalFulfilled >= requests[member].requested) {
+      payOut(memberPayable, payee);
+    }
   }
 
-  function payOut (address payable member) private {
-    member.transfer((requests[member].requested) / 1000);
+  function payOut (address payable payee,
+  address payable payer) private {
+    Request memory request = requests[payee];
+    if (request.totalFulfilled > request.requested) {
+      pay(payer, request.totalFulfilled - request.requested);
+    }
+    pay(payee, request.requested);
   }
+
+  function pay(address payable receiver, uint256 amt) private {
+    receiver.transfer(amt);
+  }  
 }
