@@ -9,6 +9,7 @@ import './App.css';
 import { LENDING_GROUP_MANAGER_ABI, LENDING_GROUP_MANAGER_ADDRESS } from './config';
 import Home from './Home';
 import CreateCircle from './CreateCircle';
+import logo from './full_logo.png';
 
 class App extends Component {
   componentDidMount() {
@@ -36,7 +37,7 @@ class App extends Component {
       <HashRouter>
         <div>
           <body className="header">
-            <img src="full_logo.png" alt="Decentralend" className="logo" ></img>
+            <img src={logo} alt="Decentralized" className="logo"/>
             <body className="nav">
               <NavLink to="/home">Home</NavLink>
               <NavLink to="/create-circle">Create Circle</NavLink>
