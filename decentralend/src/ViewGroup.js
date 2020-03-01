@@ -19,20 +19,20 @@ class ViewGroup extends Component {
     }
 
     componentWillMount() {
-        this.setState({setGroupCalled: true});
         this.setGroup();
         this.setMemberAddresses();
         this.setMembers();
         this.setMemberRequests();
+        this.setState({setGroupCalled: true});
       }
 
     async setMemberAddresses() {
-        this.state.memAddresses.push(await this.props.lendingGroup.methods.getMemberAddresses().call());
+        this.state.memAddresses.push(await this.state.lendingGroup.methods.getMemberAddresses().call());
     }
 
     async setGroup() {
-        const groupAddress = this.props.address;
-        this.state.lendingGroup = new this.props.web3.eth.Contract(LENDING_GROUP_ABI, groupAddress);
+        const groupAddress = this.props.match.params.address;
+        this.state.lendingGroup = new this.props.web3js.eth.Contract(LENDING_GROUP_ABI, groupAddress);
     }
 
     async setMembers() {
@@ -44,7 +44,7 @@ class ViewGroup extends Component {
     }
     async setMemberRequests() {
         for (let id = 0; id < this.state.memAddresses.length; id++) {
-            let requestTuple = await this.props.lendingGroup.methods.getRequest(this.state.memAddresses[id]).call();
+            let requestTuple = await this.state.lendingGroup.methods.getRequest(this.state.memAddresses[id]).call();
 
             let request = new Request(requestTuple[0], requestTuple[1]);
             this.state.member[id].request = request;
@@ -53,13 +53,13 @@ class ViewGroup extends Component {
     }
 
     async handleRequest(amount) {
-        console.log(this.props.lendingGroup);
-        this.props.lendingGroup.methods.requestMoney(amount).send({ from: this.props.account, gas: 100000 });
+        console.log(this.state.lendingGroup);
+        this.state.lendingGroup.methods.requestMoney(amount).send({ from: this.props.account, gas: 100000 });
     }
 
     async handleDonate(member, amount) {
-        console.log(this.props.lendingGroup);
-        this.props.lendingGroup.methods.giveMoney(member).send({
+        console.log(this.state.lendingGroup);
+        this.state.lendingGroup.methods.giveMoney(member).send({
             from: this.props.account,
             value: amount,
             gas: 100000
