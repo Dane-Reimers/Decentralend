@@ -13,6 +13,7 @@ contract LendingGroup {
     int balance;
   }
 
+  uint256 constant MULT_FACTOR = 1000;
   string public name;
   address public owner;
   address[] memberAddress;
@@ -63,13 +64,13 @@ contract LendingGroup {
   function requestMoney (uint amount) public {
     require (requests[msg.sender].requested == 0,
      "You have already requested money");
-    requests[msg.sender] = Request(amount * 1000, 0);
+    requests[msg.sender] = Request(amount * MULT_FACTOR, 0);
   }
 
   function giveMoney (address member) public payable {
     address payable memberPayable = address (uint160(member));
     address payable payee = address (uint160(msg.sender));
-    requests[member].totalFulfilled += msg.value;
+    requests[member].totalFulfilled += msg.value * MULT_FACTOR;
     members[msg.sender].balance += int256(msg.value);
 
     if (requests[member].totalFulfilled >= requests[member].requested) {
@@ -83,7 +84,7 @@ contract LendingGroup {
     if (request.totalFulfilled > request.requested) {
       pay(payer, request.totalFulfilled - request.requested);
     }
-    pay(payee, request.requested);
+    pay(payee, request.requested / MULT_FACTOR);
   }
 
   function pay(address payable receiver, uint256 amt) private {
