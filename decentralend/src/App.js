@@ -66,7 +66,8 @@ class App extends Component {
               }
             />
             <Route exact path="/group/:address" render={props =>
-                <ViewGroup web3js={this.state.web3} account={this.state.account} {...props} />
+                this.state.web3 && this.state.account &&
+                <ViewGroup web3={this.state.web3} account={this.state.account} {...props} />
               }
             />
           </div>
