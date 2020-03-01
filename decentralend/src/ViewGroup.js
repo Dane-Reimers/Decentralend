@@ -21,10 +21,10 @@ class ViewGroup extends Component {
     componentWillMount() {
         this.setState({setGroupCalled: true});
         this.setGroup().then(() =>
-        this.setMemberAddresses(),
-        this.setMembers(),
-        this.setMemberRequests().then(() => this.setGroupName()),
-        )
+        this.setMemberAddresses().then(() => 
+        this.setMembers().then(() => 
+        this.setMemberRequests().then(() => 
+        this.setGroupName()))))
       }
 
     async setGroupName() {
@@ -34,11 +34,12 @@ class ViewGroup extends Component {
 
     async setMemberAddresses() {
         const addresses = await this.state.lendingGroup.methods.getMemberAddresses().call()
+        console.log(addresses)
         this.setState({memAddresses: addresses})
     }
 
     async setGroup() {
-        const groupAddress = this.props.match.params.address;
+        const groupAddress = this.props.match.params.address
         const group = await (new this.props.web3.eth.Contract(LENDING_GROUP_ABI, groupAddress))
         this.setState({lendingGroup: group})
     }
@@ -50,6 +51,7 @@ class ViewGroup extends Component {
             var member = new Member(memberTuple[0], memberTuple[1]);
             members.push(member)
         }
+        console.log(members)
         this.setState({members})
     }
 
@@ -87,12 +89,12 @@ class ViewGroup extends Component {
               <div className="sub-header"><b>Group</b></div>
               <div id="groupName">Your group name is: { this.state.groupName }</div>
               <div>
-              {this.state.memAddresses.map(function(group, idx){
-              return (
-                <div key={idx}>
-                  <h2>{this.state.memAddresses[idx]}</h2>
-                </div>
-              )})}
+                {this.state.members.map(function(member, idx){
+                return (
+                    <div key={idx}>
+                    <h2>{member.toString()}</h2>
+                    </div>
+                )})}
             </div>
             </div>
           </div>
