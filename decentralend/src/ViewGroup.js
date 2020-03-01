@@ -106,7 +106,7 @@ class ViewGroup extends Component {
         console.log(this.state.requestOption)
         const amount = this.state.loanAmount
         await this.state.lendingGroup.methods.giveMoney(requesterAddress)
-            .send({from: this.props.account, gas: 100000, value: amount})
+            .send({from: this.props.account, gas: 100000, value: (amount / 1000)})
             .once('receipt', (receipt) => {
             console.log(receipt)
             this.setState({requestOption: null, loanAmount: 0})
