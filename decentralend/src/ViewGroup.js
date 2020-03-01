@@ -136,64 +136,71 @@ class ViewGroup extends Component {
     render() {
         return (<div>
             <div>
-              <div className="sub-header"><b>Group</b></div>
-              <div id="groupName">Your group name is: { this.state.groupName }</div>
-              <div>
-                {this.state.members.map(function(member, idx){
-                return (
-                    <div key={idx}>
-                        <h2>{member.toString()}</h2>
+              <div className="groupHeader"><b> { this.state.groupName }</b></div>
+              <div id="groupData">
+                <div id="memberList" className="groupList"> 
+                    <div className="sub-header" style={{paddingBottom:"15px"}}>Group Members</div>
+                    {this.state.members.map(function(member, idx){
+                    return (
+                        <div key={idx}>
+                            <div className="listElem">{member.toString()}</div>
+                        </div>
+                    )})}
+                </div>
+                <div id="requestList" className="groupList">
+                    <div className="sub-header" style={{paddingBottom:"15px"}}>Current Requests</div>
+                    {this.state.requests.map(function(request, idx){
+                    return (
+                        <div key={idx}>
+                            <div className="listElem">{request.toString()}</div>
+                        </div>
+                    )})}
+                </div>
+                <div id="addMember" className="groupList">
+                <div className="sub-header">Add Member</div>
+                    <form onSubmit={this.handleAddMember}>
+                        <label>
+                        <input name="addMemberName" type="text" placeholder="New member name..."
+                            value={this.state.addMemberName} onChange={this.handleChange}/>
+                        </label>
+                        <label>
+                        <input name="addMemberAddress" type="text" placeholder="New member address..."
+                            value={this.state.addMemberAddress} onChange={this.handleChange}/>
+                        </label>
+                        <br/>
+                        <input id="submit" type="submit" value="Submit"/>
+                    </form>
+                </div>
+                <div id="manageRequests" className="groupList">
+                    <div>
+                        <div className="sub-header" style={{paddingBottom:"15px"}}>Lend</div>
+                        <form onSubmit={this.handleDonate}>
+                            <label>
+                            <Select name="requestOption" options={this.state.requestOptions} onChange={this.handleSelectChange}
+                                value={this.state.requestOption} placeholder="Select a recipiant"/>
+                            </label>
+                            <br/>
+                            <label>
+                            <input name="loanAmount" type="number" placeholder="Loan amount..."
+                                value={this.state.donateAmount} onChange={this.handleChange}/>
+                            </label>
+                            <br/>
+                            <input id="submit" type="submit" value="Submit"/>
+                        </form>
                     </div>
-                )})}
-              </div>
-              <div>
-                {this.state.requests.map(function(request, idx){
-                return (
-                    <div key={idx}>
-                        <h2>{request.toString()}</h2>
+                    <br/>
+                    <hr/>
+                    <div>
+                    <div className="sub-header">Request</div>
+                        <form onSubmit={this.handleRequest}>
+                            <label>
+                            <input name="requestAmount" type="number" placeholder="Amount..." value={this.state.requestAmount} onChange={this.handleChange}/>
+                            </label>
+                            <br/>
+                            <input id="submit" type="submit" value="Submit"/>
+                        </form>
                     </div>
-                )})}
-              </div>
-              <div>
-                <h3>Add Request:</h3>
-                <form onSubmit={this.handleRequest}>
-                    <label>
-                    <input name="requestAmount" type="number" placeholder="Group name..." value={this.state.requestAmount} onChange={this.handleChange}/>
-                    </label>
-                    <br/>
-                    <input id="submit" type="submit" value="Submit"/>
-                </form>
-              </div>
-              <div>
-                <h3>Add Member:</h3>
-                <form onSubmit={this.handleAddMember}>
-                    <label>
-                    <input name="addMemberName" type="text" placeholder="New member name..."
-                        value={this.state.addMemberName} onChange={this.handleChange}/>
-                    </label>
-                    <label>
-                    <input name="addMemberAddress" type="text" placeholder="New member address..."
-                        value={this.state.addMemberAddress} onChange={this.handleChange}/>
-                    </label>
-                    <br/>
-                    <input id="submit" type="submit" value="Submit"/>
-                </form>
-              </div>
-              <div>
-                <h3>Donate:</h3>
-                <form onSubmit={this.handleDonate}>
-                    <label>
-                    <Select name="requestOption" options={this.state.requestOptions} onChange={this.handleSelectChange}
-                        value={this.state.requestOption} placeholder="Select an option"/>
-                    </label>
-                    <br/>
-                    <label>
-                    <input name="loanAmount" type="number" placeholder="Loan amount..."
-                        value={this.state.donateAmount} onChange={this.handleChange}/>
-                    </label>
-                    <br/>
-                    <input id="submit" type="submit" value="Submit"/>
-                </form>
+                </div>
               </div>
             </div>
           </div>
