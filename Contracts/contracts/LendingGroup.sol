@@ -26,7 +26,7 @@ contract LendingGroup {
   constructor(string memory _groupName, string memory _ownerName, address _owner) public {
     name = _groupName;
     owner = _owner;
-    members[_owner] = Member(_ownerName, 0);
+    addMember(_owner, _ownerName);
   }
 
   function getRequest(address member) public view returns (uint256, uint256) {
