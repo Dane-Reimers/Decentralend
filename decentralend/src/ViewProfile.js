@@ -30,7 +30,7 @@ class Home extends Component {
       const inGroup = await this.inGroup(group)
       if (inGroup) {
         const groupName = await group.methods.name().call()
-        const _balance = await group.methods.getBalance(this.props.account);
+        const _balance = await group.methods.getBalance(this.props.account).call();
         let newBalance = _balance + this.state.balance;
         this.setState({balace: newBalance});
         group.name = groupName
