@@ -5,6 +5,7 @@ import {
 } from "react-router-dom";
 import { LENDING_GROUP_ABI } from "./config";
 import ViewGroup from "./ViewGroup"
+import logo from './part_logo.png';
  
 class Home extends Component {
   constructor(props) {
@@ -48,16 +49,18 @@ class Home extends Component {
     return (
       <div>
         <div id="profile">
-          <div className="sub-header"><b>Profile</b></div>
-          <div id="accName">Your account number is: { this.props.account }</div>
-          <div>
-          {this.state.groups.map(function(group, idx){
-          return (
-            <div key={idx}>
-              <NavLink className="nav" to={`/group/${group._address}`}>{ group.name }</NavLink>
+          <img src={logo} alt="" className="bigLogo"/>
+          <div id="groupBox">
+            <div className="sub-header" style={{width:"5.5em",marginBottom:"10px",fontSize:"7vmin"}}><b>Your Groups</b></div>
+            <div>
+              {this.state.groups.map(function(group, idx){
+              return (
+                <div key={idx}>
+                  <NavLink className="group" to={`/group/${group._address}`}>{ group.name }</NavLink>
+                </div>
+              )})}
             </div>
-          )})}
-        </div>
+          </div>
         </div>
       </div>
     );
