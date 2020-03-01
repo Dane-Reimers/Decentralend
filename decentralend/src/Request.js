@@ -1,6 +1,7 @@
 class Request {
-    constructor(requester, amount, filled) {
+    constructor(requester, requesterAddress, amount, filled) {
         this.requester = requester
+        this.requesterAddress = requesterAddress
         this.amountRequested = amount
         this.amountFullfilled = filled
     }

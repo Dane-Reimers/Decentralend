@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { LENDING_GROUP_ABI } from "./config";
-import Dropdown from 'react-dropdown'
+import Select from 'react-select';
 import 'react-dropdown/style.css'
 import Member from "./Member";
 import Request from "./Request";
@@ -81,7 +81,7 @@ class ViewGroup extends Component {
             const requestTuple = await this.state.lendingGroup.methods.getRequest(memAddress).call()
             if (requestTuple[0] != 0) {
                 const requestor = await this.state.lendingGroup.methods.getMember(memAddress).call()
-                const request = new Request(requestor[0], requestTuple[0], requestTuple[1])
+                const request = new Request(requestor[0], memAddress, requestTuple[0], requestTuple[1])
                 this.state.members[id].request = request
                 requests.push(request)
                 requestAmounts.push(0)
@@ -102,9 +102,15 @@ class ViewGroup extends Component {
 
     async handleDonate(event) {
         event.preventDefault()
-        console.log(event)
+        const requesterAddress = this.state.requestOption.value.requesterAddress
         console.log(this.state.requestOption)
-        console.log(this.state.loanAmount)
+        const amount = this.state.loanAmount
+        await this.state.lendingGroup.methods.giveMoney(requesterAddress)
+            .send({from: this.props.account, gas: 100000, value: amount})
+            .once('receipt', (receipt) => {
+            console.log(receipt)
+            this.setState({requestOption: null, loanAmount: 0})
+            })
     }
 
     async handleAddMember(event) {
@@ -122,6 +128,10 @@ class ViewGroup extends Component {
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value})
     }
+
+    handleSelectChange = requestOption => {
+        this.setState({ requestOption });
+      };
 
     render() {
         return (<div>
@@ -173,7 +183,7 @@ class ViewGroup extends Component {
                 <h3>Donate:</h3>
                 <form onSubmit={this.handleDonate}>
                     <label>
-                    <Dropdown name="requestOption" options={this.state.requestOptions} onChange={this._onSelect}
+                    <Select name="requestOption" options={this.state.requestOptions} onChange={this.handleSelectChange}
                         value={this.state.requestOption} placeholder="Select an option"/>
                     </label>
                     <br/>
