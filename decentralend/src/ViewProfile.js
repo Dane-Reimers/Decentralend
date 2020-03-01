@@ -12,13 +12,11 @@ class Home extends Component {
     super(props);
     this.state = {
       groups: [],
-      setGroupsCalled: false,
       totalBalance : 0
     };
   }
 
   componentWillMount() {
-    this.setState({setGroupsCalled: true})
     this.setGroups()
   }
 

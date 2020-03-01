@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { LENDING_GROUP_ABI } from "./config";
+import Dropdown from 'react-dropdown'
+import 'react-dropdown/style.css'
 import Member from "./Member";
 import Request from "./Request";
 
@@ -14,11 +16,19 @@ class ViewGroup extends Component {
             memAddresses: [],
             name: "",
             setGroupCalled: false,
-            requestAmount: 0
+            addRequestAmount: 0,
+            requestAmounts: [],
+            addMemberName: "",
+            addMemberAddress: "",
+            requestOptions: [],
+            requestOption: null,
+            loanAmount: 0
         }
 
         this.handleChange = this.handleChange.bind(this);
         this.handleRequest = this.handleRequest.bind(this);
+        this.handleAddMember = this.handleAddMember.bind(this);
+        this.handleDonate = this.handleDonate.bind(this);
     }
 
     componentWillMount() {
@@ -56,6 +66,7 @@ class ViewGroup extends Component {
         for (let id = 0; id < this.state.memAddresses.length; id++) {
             let memberTuple = await this.state.lendingGroup.methods.getMember(this.state.memAddresses[id]).call();
             var member = new Member(memberTuple[0], memberTuple[1]);
+            console.log(this.state.memAddresses[id])
             members.push(member)
         }
         this.setState({members})
@@ -63,38 +74,49 @@ class ViewGroup extends Component {
 
     async setMemberRequests() {
         let requests = []
+        let requestAmounts = []
+        let requestOptions = []
         for (let id = 0; id < this.state.memAddresses.length; id++) {
             const memAddress = this.state.memAddresses[id]
             const requestTuple = await this.state.lendingGroup.methods.getRequest(memAddress).call()
             if (requestTuple[0] != 0) {
                 const requestor = await this.state.lendingGroup.methods.getMember(memAddress).call()
-                console.log(requestor)
                 const request = new Request(requestor[0], requestTuple[0], requestTuple[1])
                 this.state.members[id].request = request
                 requests.push(request)
+                requestAmounts.push(0)
+                requestOptions.push({value: request, label: requestor[0]})
             }
         }
-        this.setState({requests: requests})
+        this.setState({requestOptions})
+        this.setState({requestAmounts})
+        this.setState({requests})
     }
 
     async handleRequest(event) {
         event.preventDefault()
-        const amount = this.state.requestAmount
-        console.log(amount)
+        const amount = this.state.addRequestAmount
         this.state.lendingGroup.methods.requestMoney(amount).send({ from: this.props.account, gas: 100000 });
-        this.setState({requestAmount: 0})
+        this.setState({addRequestAmount: 0})
     }
 
-    async handleDonate(member, amount) {
-        this.state.lendingGroup.methods.giveMoney(member).send({
-            from: this.props.account,
-            value: amount,
-            gas: 100000
-        })
+    async handleDonate(event) {
+        event.preventDefault()
+        console.log(event)
+        console.log(this.state.requestOption)
+        console.log(this.state.loanAmount)
     }
 
-    async addMember(memberAddress, name) {
-        await this.state.lendingGroup.methods.addMember(memberAddress, name);
+    async handleAddMember(event) {
+        event.preventDefault()
+        const address = this.state.addMemberAddress
+        const name = this.state.addMemberName
+        await this.state.lendingGroup.methods.addMember(address, name)
+            .send({from: this.props.account, gas: 100000})
+            .once('receipt', (receipt) => {
+            console.log(receipt)
+            this.setState({addMemberAddress: "", addMemberName: ""})
+            })
     }
 
     handleChange(event) {
@@ -103,7 +125,7 @@ class ViewGroup extends Component {
 
     render() {
         return (<div>
-            <div id="profile">
+            <div>
               <div className="sub-header"><b>Group</b></div>
               <div id="groupName">Your group name is: { this.state.groupName }</div>
               <div>
@@ -123,9 +145,41 @@ class ViewGroup extends Component {
                 )})}
               </div>
               <div>
+                <h3>Add Request:</h3>
                 <form onSubmit={this.handleRequest}>
                     <label>
                     <input name="requestAmount" type="number" placeholder="Group name..." value={this.state.requestAmount} onChange={this.handleChange}/>
+                    </label>
+                    <br/>
+                    <input id="submit" type="submit" value="Submit"/>
+                </form>
+              </div>
+              <div>
+                <h3>Add Member:</h3>
+                <form onSubmit={this.handleAddMember}>
+                    <label>
+                    <input name="addMemberName" type="text" placeholder="New member name..."
+                        value={this.state.addMemberName} onChange={this.handleChange}/>
+                    </label>
+                    <label>
+                    <input name="addMemberAddress" type="text" placeholder="New member address..."
+                        value={this.state.addMemberAddress} onChange={this.handleChange}/>
+                    </label>
+                    <br/>
+                    <input id="submit" type="submit" value="Submit"/>
+                </form>
+              </div>
+              <div>
+                <h3>Donate:</h3>
+                <form onSubmit={this.handleDonate}>
+                    <label>
+                    <Dropdown name="requestOption" options={this.state.requestOptions} onChange={this._onSelect}
+                        value={this.state.requestOption} placeholder="Select an option"/>
+                    </label>
+                    <br/>
+                    <label>
+                    <input name="loanAmount" type="number" placeholder="Loan amount..."
+                        value={this.state.donateAmount} onChange={this.handleChange}/>
                     </label>
                     <br/>
                     <input id="submit" type="submit" value="Submit"/>
