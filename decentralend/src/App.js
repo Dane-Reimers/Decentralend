@@ -61,12 +61,13 @@ class App extends Component {
               }
             />
             <Route exact path="/profile" render={props =>
+                this.state.lendingGroupManager && 
                 <ViewProfile lendingGroupManager={this.state.lendingGroupManager} web3={this.state.web3} account={this.state.account} {...props} />
               }
             />
-            <Route exact path="/group" render={props =>
-                  <ViewGroup group={this.state.group} {...props} />
-                }
+            <Route exact path="/group/:address" render={props =>
+                <ViewGroup web3={this.state.web3} account={this.state.account} {...props} />
+              }
             />
           </div>
         </div>

@@ -15,14 +15,9 @@ class Home extends Component {
     };
   }
 
-  componentWillReceiveProps() {
-    if (this.props.lendingGroupManager !== undefined &&
-        this.props.account !== undefined &&
-        !this.state.setGroupsCalled)
-    {
-      this.setState({setGroupsCalled: true})
-      this.setGroups()
-    }
+  componentWillMount() {
+    this.setState({setGroupsCalled: true})
+    this.setGroups()
   }
 
   async setGroups() {
@@ -54,11 +49,7 @@ class Home extends Component {
           {this.state.groups.map(function(group, idx){
           return (
             <div key={idx}>
-              <NavLink className="nav" to="/group">{ group.name }</NavLink>
-              <Route exact path="/group" render={props =>
-                  <ViewGroup group={group} {...props} />
-                }
-              />
+              <NavLink className="nav" to={`/group/${group._address}`}>{ group.name }</NavLink>
             </div>
           )})}
         </div>
