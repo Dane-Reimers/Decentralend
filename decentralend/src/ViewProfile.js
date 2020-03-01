@@ -43,12 +43,14 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <h2>Profile</h2>
-        <h3>Your account number is: { this.props.account }</h3>
-        <div>
-          {this.state.groups.map(function(group, idx){
-          return (<div key={idx}>{group}</div>)
-          })}
+        <div id="profile">
+          <div className="sub-header"><b>Profile</b></div>
+          <div id="accName">Your account number is: { this.props.account }</div>
+          <div>
+            {this.state.groups.map(function(group, idx){
+            return (<div key={idx}>{group}</div>)
+            })}
+          </div>
         </div>
       </div>
     );
