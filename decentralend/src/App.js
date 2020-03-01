@@ -66,6 +66,7 @@ class App extends Component {
               }
             />
             <Route exact path="/group/:address" render={props =>
+                this.state.web3 && this.state.account &&
                 <ViewGroup web3={this.state.web3} account={this.state.account} {...props} />
               }
             />
