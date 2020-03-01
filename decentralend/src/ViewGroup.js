@@ -8,12 +8,12 @@ class ViewGroup extends Component {
         super(props);
         this.state = {
             groupName: "",
-            lendingGroup : null,
-            requests : [],
-            members : [],
-            memAddresses : [],
-            name : "",
-            setGroupCalled : false
+            lendingGroup: null,
+            requests: [],
+            members: [],
+            memAddresses: [],
+            name: "",
+            setGroupCalled: false
         }
 
     }
@@ -23,9 +23,14 @@ class ViewGroup extends Component {
         this.setGroup().then(() =>
         this.setMemberAddresses(),
         this.setMembers(),
-        this.setMemberRequests()
+        this.setMemberRequests().then(() => this.setGroupName()),
         )
       }
+
+    async setGroupName() {
+        const groupName = await this.state.lendingGroup.methods.name().call()
+        this.setState({groupName: groupName})
+    }
 
     async setMemberAddresses() {
         const addresses = await this.state.lendingGroup.methods.getMemberAddresses().call()
@@ -34,25 +39,30 @@ class ViewGroup extends Component {
 
     async setGroup() {
         const groupAddress = this.props.match.params.address;
-        const group = new this.props.web3.eth.Contract(LENDING_GROUP_ABI, groupAddress)
+        const group = await (new this.props.web3.eth.Contract(LENDING_GROUP_ABI, groupAddress))
         this.setState({lendingGroup: group})
     }
 
     async setMembers() {
+        let members = []
         for (let id = 0; id < this.state.memAddresses.length; id++) {
-            let memberTuple = await this.lendingGroup.methods.getMember(this.memAddresses[id]).call();
+            let memberTuple = await this.state.lendingGroup.methods.getMember(this.memAddresses[id]).call();
             var member = new Member(memberTuple[0], memberTuple[1]);
-            this.state.members.push(member);
+            members.push(member)
         }
+        this.setState({members})
     }
+
     async setMemberRequests() {
+        let requests = []
         for (let id = 0; id < this.state.memAddresses.length; id++) {
             let requestTuple = await this.props.lendingGroup.methods.getRequest(this.state.memAddresses[id]).call();
 
             let request = new Request(requestTuple[0], requestTuple[1]);
             this.state.member[id].request = request;
-            this.state.requests.push(request);
+            requests.push(request);
         }
+        this.setState({requests: requests})
     }
 
     async handleRequest(amount) {
