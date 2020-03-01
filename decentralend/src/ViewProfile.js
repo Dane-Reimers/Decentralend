@@ -14,7 +14,7 @@ class Home extends Component {
       groups: [],
       balanceByGroup: [],
       setGroupsCalled: false,
-      totalBalance : -1337
+      totalBalance : 0
     };
   }
 
@@ -63,6 +63,9 @@ class Home extends Component {
                   <NavLink className="group" to={`/group/${group._address}`}>{ group.name }</NavLink>
                 </div>
               )})}
+            </div>
+            <div>
+              <p>Your Balance: {this.state.totalBalance}</p>
             </div>
           </div>
         </div>
