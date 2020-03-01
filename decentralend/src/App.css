@@ -176,7 +176,7 @@ input {
   position: absolute;
   top: 30px;
   margin-left:75px;
-  padding:40px;
+  padding:30px;
   padding-top:20px;
   border-radius: 10px;
   max-width: 40vh;
@@ -192,7 +192,7 @@ input {
   padding:0.5em;
   text-decoration: none;
   color: #60a8a0;
-  font-size: 5vmin;
+  font-size: 4.5vmin;
 }
 
 .App-link {

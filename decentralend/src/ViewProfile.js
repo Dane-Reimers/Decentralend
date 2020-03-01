@@ -13,7 +13,7 @@ class Home extends Component {
     this.state = {
       groups: [],
       setGroupsCalled: false,
-      totalBalance : -1337
+      totalBalance : 0
     };
   }
 
@@ -51,7 +51,7 @@ class Home extends Component {
         <div id="profile">
           <img src={logo} alt="" className="bigLogo"/>
           <div id="groupBox">
-            <div className="sub-header" style={{width:"5.5em",marginBottom:"10px",fontSize:"7vmin"}}><b>Your Groups</b></div>
+            <div className="sub-header" style={{width:"8em",marginBottom:"10px",fontSize:"6vmin"}}><b>Lending Groups</b></div>
             <div>
               {this.state.groups.map(function(group, idx){
               return (
@@ -59,6 +59,9 @@ class Home extends Component {
                   <NavLink className="group" to={`/group/${group._address}`}>{ group.name }</NavLink>
                 </div>
               )})}
+            </div>
+            <div>
+              <p>Your Balance: {this.state.totalBalance}</p>
             </div>
           </div>
         </div>
