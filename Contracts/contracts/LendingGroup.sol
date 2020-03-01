@@ -34,6 +34,10 @@ contract LendingGroup {
       return (request.requested, request.totalFulfilled);
   }
 
+  function getBalance(address member) public view returns (int256) {
+    return members[member].balance;
+  }
+
   function getMember(address memberAdd) public view returns (string memory, int) {
     Member memory member = members[memberAdd];
 

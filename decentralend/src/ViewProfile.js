@@ -5,13 +5,15 @@ import {
 } from "react-router-dom";
 import { LENDING_GROUP_ABI } from "./config";
 import ViewGroup from "./ViewGroup"
+import logo from './part_logo.png';
  
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       groups: [],
-      setGroupsCalled: false
+      setGroupsCalled: false,
+      totalBalance : -1337
     };
   }
 
@@ -28,6 +30,9 @@ class Home extends Component {
       const inGroup = await this.inGroup(group)
       if (inGroup) {
         const groupName = await group.methods.name().call()
+        const _balance = await group.methods.getBalance(this.props.account);
+        let newBalance = _balance + this.state.balance;
+        this.setState({balace: newBalance});
         group.name = groupName
         const prevGroups = this.state.groups
         this.setState({groups: [...prevGroups, group]})
@@ -44,16 +49,18 @@ class Home extends Component {
     return (
       <div>
         <div id="profile">
-          <div className="sub-header"><b>Profile</b></div>
-          <div id="accName">Your account number is: { this.props.account }</div>
-          <div>
-          {this.state.groups.map(function(group, idx){
-          return (
-            <div key={idx}>
-              <NavLink className="nav" to={`/group/${group._address}`}>{ group.name }</NavLink>
+          <img src={logo} alt="" className="bigLogo"/>
+          <div id="groupBox">
+            <div className="sub-header" style={{width:"5.5em",marginBottom:"10px",fontSize:"7vmin"}}><b>Your Groups</b></div>
+            <div>
+              {this.state.groups.map(function(group, idx){
+              return (
+                <div key={idx}>
+                  <NavLink className="group" to={`/group/${group._address}`}>{ group.name }</NavLink>
+                </div>
+              )})}
             </div>
-          )})}
-        </div>
+          </div>
         </div>
       </div>
     );

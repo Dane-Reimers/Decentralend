@@ -37,6 +37,11 @@ class ViewGroup extends Component {
         this.setState({memAddresses: addresses})
     }
 
+    async setGroupName() {
+        const _name = await this.state.lendingGroup.methods.name().call();
+        this.setState({name: _name})
+    }
+
     async setGroup() {
         const groupAddress = this.props.match.params.address
         const group = await (new this.props.web3.eth.Contract(LENDING_GROUP_ABI, groupAddress))

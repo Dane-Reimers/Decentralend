@@ -163,14 +163,36 @@ input {
 }
 
 #profile {
-  margin-left:100px;
-  margin-top:30px;
+  position: relative;
+  font-family: Roboto;
+  background-color: #60a8a0;
+  width: 100%;
+  height: 82.3vh;
+  overflow: hidden;
+}
+
+#groupBox {
+  background-color: white;
+  position: absolute;
+  top: 30px;
+  margin-left:75px;
+  padding:40px;
+  padding-top:20px;
+  border-radius: 10px;
+  max-width: 40vh;
 }
 
 #accName {
   padding-top:10px;
   color: #3f5685;
   font-size: 3vmin;
+}
+
+.group {
+  padding:0.5em;
+  text-decoration: none;
+  color: #60a8a0;
+  font-size: 5vmin;
 }
 
 .App-link {
