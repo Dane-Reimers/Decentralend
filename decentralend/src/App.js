@@ -38,7 +38,7 @@ class App extends Component {
     return (
       <HashRouter>
         <head>
-        <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Arvo|Roboto&display=swap" rel="stylesheet"/>
         </head>
         <div >
           <div className="header" id="Header">

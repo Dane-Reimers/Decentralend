@@ -43,15 +43,18 @@
   width: 10em;
 }
 
+.bigLogo {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  opacity:8%;
+}
+
 .nav {
   padding:0.5em;
   text-decoration: none;
   color: #60a8a0;
   font-size: 4vmin;
-}
-
-.small-button {
-  
 }
 
 .header {
@@ -70,22 +73,23 @@
   font-size: 5vmin;
   padding:0.1em;
   border-bottom: 5px solid #60a8a0;
+  z-index: 2;
 }
 
 .backgroundImg {
   width: 100%;
-  grid-area: 1 / 1 / 12 / 10;
+  grid-area: 1 / 1 / 10 / 6;
 }
 
 .background {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(10, 1fr);
+  grid-template-rows: repeat(8, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  font-family: Arvo, sans-serif;
   color: white;
   text-align: center;
+  font-family: 'Arvo', sans-serif;
   text-shadow: -1px 0 #60a8a0, 0 1px #60a8a0, 1px 0 #60a8a0, 0 -1px #60a8a0;
 }
 
@@ -98,17 +102,17 @@
   grid-area: 5 / 2 / 6 / 5;
 }
 
-.sub-header {
-  background-color: white;
-  color: #60a8a0;
-  height: 15vh;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  font-family: interstate, sans-serif;
-  font-style: normal;
-  font-weight: 100;
-  font-size: calc(18px + 2vmin)
+#about {
+  position: relative;
+}
+
+#mission {
+  z-index: 1;
+  top: 10px;
+  position: absolute;
+  color: #2e3338;
+  font-size: 8vmin;
+  font-family: Roboto, sans-serif;
 }
 
 .App-link {
