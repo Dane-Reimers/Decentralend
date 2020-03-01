@@ -5,17 +5,15 @@ import Request from "./Request";
 class ViewGroup extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.requests = [];
         this.members = [];
         this.memAddresses = [];
         this.name = "";
     
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
       }
 
       componentWillUpdate() {
+        console.log(this.props.group)
         if (this.props.lendingGroup != undefined &&
             this.props.account != undefined)
         {
