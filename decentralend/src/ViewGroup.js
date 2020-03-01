@@ -1,7 +1,4 @@
 import React, { Component } from "react";
-import './App.css';
-import '/Member';
-import '/Request';
 
 class ViewGroup extends Component {
     constructor(props) {

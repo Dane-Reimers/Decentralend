@@ -9,7 +9,6 @@ import './App.css';
 import { LENDING_GROUP_MANAGER_ABI, LENDING_GROUP_MANAGER_ADDRESS } from './config';
 import Home from './Home';
 import CreateCircle from './CreateCircle';
-import ViewGroup from './ViewGroup';
 import logo from './full_logo.png';
 import ViewProfile from './ViewProfile';
 
@@ -39,7 +38,7 @@ class App extends Component {
     return (
       <HashRouter>
         <head>
-        <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Arvo|Roboto&display=swap" rel="stylesheet"/>
         </head>
         <div >
           <div className="header" id="Header">

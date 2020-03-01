@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import background_img from './prefumo_canyon.jpg';
+import logo from './part_logo.png';
  
 class Home extends Component {
   render() {
@@ -8,10 +9,13 @@ class Home extends Component {
         <div className="background">
           <img src={background_img} alt="" className="backgroundImg"/>
           <div className="overlap">Peer to Peer Lending</div>
-          <div className="overlap2">Removing Systemic Bias from Loans</div>
+          <div className="overlap2">Removing Systemic Bias From Loans</div>
         </div>
-        <h2>Home</h2>
-        <h3>There are { this.props.numGroups } group(s)</h3>
+        <div id="about">
+          <div id="mission">Our Mission</div>
+          <img src={logo} alt="" className="bigLogo"/>
+          <h3>There are { this.props.numGroups } group(s)</h3>
+        </div>
       </div>
     );
   }
