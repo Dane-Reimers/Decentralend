@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 export const LENDING_GROUP_MANAGER_ADDRESS = "0x6681Dc3Ec7244f7721C5A52661e7736fe8BdA9e1"
+=======
+export const LENDING_GROUP_MANAGER_ADDRESS = "0x3E454135B794954DbbD7E36caDa97C4c9799cBBF"
+>>>>>>> ec49bcbde1d8513c999b63d4a7a224c8f111ee0e
 
 export const LENDING_GROUP_MANAGER_ABI = [
     {
@@ -145,6 +149,27 @@ export const LENDING_GROUP_ABI = [
           "internalType": "uint256",
           "name": "",
           "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "member",
+          "type": "address"
+        }
+      ],
+      "name": "getBalance",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
         }
       ],
       "payable": false,
