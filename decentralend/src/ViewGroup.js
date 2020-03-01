@@ -66,7 +66,6 @@ class ViewGroup extends Component {
         for (let id = 0; id < this.state.memAddresses.length; id++) {
             let memberTuple = await this.state.lendingGroup.methods.getMember(this.state.memAddresses[id]).call();
             var member = new Member(memberTuple[0], memberTuple[1]);
-            console.log(this.state.memAddresses[id])
             members.push(member)
         }
         this.setState({members})
@@ -194,7 +193,7 @@ class ViewGroup extends Component {
                     <div className="sub-header">Request</div>
                         <form onSubmit={this.handleRequest}>
                             <label>
-                            <input name="requestAmount" type="number" placeholder="Amount..." value={this.state.requestAmount} onChange={this.handleChange}/>
+                            <input name="addRequestAmount" type="number" placeholder="Amount..." value={this.state.addRequestAmount} onChange={this.handleChange}/>
                             </label>
                             <br/>
                             <input id="submit" type="submit" value="Submit"/>
