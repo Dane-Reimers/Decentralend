@@ -32,7 +32,7 @@ class CreateCircle extends Component {
 
   render() {
     return (
-      <div style={{position:"relative"}}>
+      <div style={{position:"relative"}} id="makeGroup">
         <img src={logo} alt="" className="bigLogo"/>
         <div id="groupForm">
           <div className="sub-header"><b>Create a new lending group</b></div>

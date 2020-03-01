@@ -48,6 +48,7 @@
   z-index: 0;
   width: 100%;
   opacity:8%;
+  overflow:hidden;
 }
 
 .nav {
@@ -121,6 +122,11 @@
   color: #3f5685;
   font-size: 5vmin;
   font-family: Roboto;
+}
+
+#makeGroup {
+  height: 80vh;
+  overflow: hidden;
 }
 
 #groupForm {
