@@ -83,7 +83,7 @@ class ViewGroup extends Component {
 
     render() {
         return (<div>
-            <h1>Hello!!</h1>
+            <h1>Working</h1>
         </div>);
         }
     }
