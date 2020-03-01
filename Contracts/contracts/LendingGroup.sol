@@ -1,4 +1,4 @@
-pragma solidity >=0.5.0;
+pragma solidity ^0.5.0;
 
 
 contract LendingGroup {
@@ -13,7 +13,6 @@ contract LendingGroup {
     int balance;
   }
 
-  uint256 constant MULT_FACTOR = 1000;
   string public name;
   address public owner;
   address[] memberAddress;
@@ -70,8 +69,8 @@ contract LendingGroup {
   function giveMoney (address member) public payable {
     address payable memberPayable = address (uint160(member));
     address payable payee = address (uint160(msg.sender));
-    requests[member].totalFulfilled += msg.value * MULT_FACTOR;
-    members[msg.sender].balance += int256(msg.value * MULT_FACTOR);
+    requests[member].totalFulfilled += msg.value;
+    members[msg.sender].balance += int256(msg.value);
 
     if (requests[member].totalFulfilled >= requests[member].requested) {
       payOut(memberPayable, payee);

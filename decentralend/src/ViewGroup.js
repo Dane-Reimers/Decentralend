@@ -106,7 +106,7 @@ class ViewGroup extends Component {
         console.log(this.state.requestOption)
         const amount = this.state.loanAmount
         await this.state.lendingGroup.methods.giveMoney(requesterAddress)
-            .send({from: this.props.account, gas: 100000, value: (amount / 1000)})
+            .send({from: this.props.account, gas: 500000, value: amount})
             .once('receipt', (receipt) => {
             console.log(receipt)
             this.setState({requestOption: null, loanAmount: 0})
@@ -177,7 +177,7 @@ class ViewGroup extends Component {
                         <form onSubmit={this.handleDonate}>
                             <label>
                             <Select name="requestOption" options={this.state.requestOptions} onChange={this.handleSelectChange}
-                                value={this.state.requestOption} placeholder="Select a recipiant"/>
+                                value={this.state.requestOption} placeholder="Select a recipient"/>
                             </label>
                             <br/>
                             <label>

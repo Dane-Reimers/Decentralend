@@ -21,14 +21,13 @@ class CreateCircle extends Component {
   async handleSubmit(event) {
     this.state.loading = true
     this.props.lendingGroupManager.methods.createGroup(this.state.groupName, this.state.username)
-    .send({ from: this.props.account, gas: 100000})
+    .send({ from: this.props.account, gas: 5000000})
     .once('receipt', (receipt) => {
       console.log(receipt)
       this.setState({groupName: "", username: ""})
       this.state.loading = false
     })
     event.preventDefault()
-    window.location = "#/profile"
   }
 
   render() {
