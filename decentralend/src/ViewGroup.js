@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import Member from "./Member";
+import Request from "./Request";
 
 class ViewGroup extends Component {
     constructor(props) {
         super(props);
+        console.log(props);
         this.requests = [];
         this.members = [];
         this.memAddresses = [];
@@ -23,22 +26,22 @@ class ViewGroup extends Component {
       }
 
       async setMemberAddresses() {
-        memAddresses = await this.props.lendingGroup.methods.getMemberAddresses().call();
+        this.memAddresses.push(await this.props.lendingGroup.methods.getMemberAddresses().call());
       }
 
       async setMembers() {
           for (let id = 0; id < this.memAddresses.length; id++) {
-              memberTuple = await this.lendingGroup.methods.getMember(this.memAddresses[id]).call();
-              member = new Member(memberTuple[0], memberTuple[1]);
+              let memberTuple = await this.lendingGroup.methods.getMember(this.memAddresses[id]).call();
+              var member = new Member(memberTuple[0], memberTuple[1]);
               this.members.push(member);
           }
       }
       async setMemberRequests() {
-        for (let id = 0; i < this.memAddresses.length; id++) {
-            requestTuple = await this.props.lendingGroup.methods.getRequest(this.memAddresses[id]).call();
+        for (let id = 0; id < this.memAddresses.length; id++) {
+            let requestTuple = await this.props.lendingGroup.methods.getRequest(this.memAddresses[id]).call();
 
-            request = new Request(requestTuple[0], requestTuple[1]);
-            member[id].request = request;
+            let request = new Request(requestTuple[0], requestTuple[1]);
+            this.member[id].request = request;
             this.requests.push(request);
         }        
       }
@@ -46,7 +49,6 @@ class ViewGroup extends Component {
       async handleRequest(amount) {
           console.log(this.props.lendingGroup);
           this.props.lendingGroup.methods.requestMoney(amount).send({from: this.props.account, gas: 100000});
-          event.preventDefault()
       }
 
       async handleDonate(member, amount) {
@@ -59,7 +61,7 @@ class ViewGroup extends Component {
       }
 
       createList (_list) {
-          ul = document.createElement('ul');
+          let ul = document.createElement('ul');
           document.getElementById('myItemList').appendChild(ul);
 
           for (let id = 0; id < _list.length; id++) {

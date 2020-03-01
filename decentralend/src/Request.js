@@ -8,3 +8,4 @@ class Request {
         return "Amount requested: " + this.amountRequested.toString() + ", Amount Received: " + this.amountFullfilled.toString();
     }
 }
+export default Request;
