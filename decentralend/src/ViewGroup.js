@@ -12,19 +12,19 @@ class ViewGroup extends Component {
             requests : [],
             members : [],
             memAddresses : [],
-            name : ""
+            name : "",
+            setGroupCalled : false
         }
 
     }
 
-    componentWillUpdate() {
-        if (this.props.address != undefined &&
-            this.props.account != undefined) {
-            this.setMemberAddresses();
-            this.setMembers();
-            this.setMemberRequests();
-        }
-    }
+    componentWillMount() {
+        this.setState({setGroupCalled: true});
+        this.setGroup();
+        this.setMemberAddresses();
+        this.setMembers();
+        this.setMemberRequests();
+      }
 
     async setMemberAddresses() {
         this.state.memAddresses.push(await this.props.lendingGroup.methods.getMemberAddresses().call());
@@ -66,6 +66,28 @@ class ViewGroup extends Component {
         })
     }
 
+    async addMember(memberAddress, name) {
+        await this.state.lendingGroup.methods.addMember(memberAddress, name);
+    }
+
+    render() {
+        return (<div>
+            <div id="profile">
+              <div className="sub-header"><b>Group</b></div>
+              <div id="groupName">Your group name is: { this.state.lendingGroup.methods.name().call() }</div>
+              <div>
+              {this.state.memAddresses.map(function(group, idx){
+              return (
+                <div key={idx}>
+                  <h2>{this.state.memAddresses[idx]}</h2>
+                </div>
+              )})}
+            </div>
+            </div>
+          </div>
+        );
+      }
+
     createList(_list) {
         let ul = document.createElement('ul');
         document.getElementById('myItemList').appendChild(ul);
@@ -77,15 +99,6 @@ class ViewGroup extends Component {
         }
     }
 
-    async addMember(memberAddress, name) {
-        await this.state.lendingGroup.methods.addMember(memberAddress, name);
-    }
-
-    render() {
-        return (<div>
-            <h1>Working</h1>
-        </div>);
-        }
     }
 
     export default ViewGroup;
