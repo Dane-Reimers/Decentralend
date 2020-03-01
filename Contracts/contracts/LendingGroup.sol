@@ -84,6 +84,7 @@ contract LendingGroup {
     if (request.totalFulfilled > request.requested) {
       pay(payer, (request.totalFulfilled - request.requested));
     }
+    requests[payee] = Request(0, 0);
     pay(payee, request.requested);
   }
 
