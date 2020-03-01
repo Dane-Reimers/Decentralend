@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { LENDING_GROUP_ABI } from "./config";
 import Member from "./Member";
 import Request from "./Request";
 
@@ -7,15 +8,13 @@ class ViewGroup extends Component {
         super(props);
         console.log(props);
         this.state = {
-            lendingGroup = null,
-            requests = [],
-            members = [],
-            memAddresses = [],
-            name = ""
+            lendingGroup : null,
+            requests : [],
+            members : [],
+            memAddresses : [],
+            name : ""
         }
 
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentWillUpdate() {
@@ -78,13 +77,13 @@ class ViewGroup extends Component {
         }
     }
 
-    addMember(memberAddress, name) {
+    async addMember(memberAddress, name) {
         await this.state.lendingGroup.methods.addMember(memberAddress, name);
     }
 
     render() {
         return (<div>
-            
+            <h1>Hello!!</h1>
         </div>);
         }
     }
