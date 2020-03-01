@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import Web3 from 'web3';
+import {
+  Route,
+  HashRouter,
+  NavLink,
+} from "react-router-dom";
 import { LENDING_GROUP_ABI } from "./config";
  
 class Home extends Component {
@@ -12,8 +16,8 @@ class Home extends Component {
   }
 
   componentWillReceiveProps() {
-    if (this.props.lendingGroupManager != undefined &&
-        this.props.account != undefined &&
+    if (this.props.lendingGroupManager !== undefined &&
+        this.props.account !== undefined &&
         !this.state.setGroupsCalled)
     {
       this.setState({setGroupsCalled: true})
@@ -28,7 +32,7 @@ class Home extends Component {
       const group = new this.props.web3.eth.Contract(LENDING_GROUP_ABI, groupAddress)
       const inGroup = await this.inGroup(group)
       if (inGroup) {
-        const groupName = await group.name()
+        const groupName = await group.methods.name()
         group.name = groupName
         const prevGroups = this.state.groups
         this.setState({groups: [...prevGroups, group]})
@@ -48,8 +52,15 @@ class Home extends Component {
         <h3>Your account number is: { this.props.account }</h3>
         <div>
           {this.state.groups.map(function(group, idx){
-          return (<div key={idx}>{group._address}</div>)
-          })}
+          return (
+            <div key={idx}>
+              <NavLink className="nav" to="/group">Group</NavLink>
+              <Route exact path="/group" render={props =>
+                  <ViewGroup group={group} {...props} />
+                }
+              />
+            </div>
+          )})}
         </div>
       </div>
     );
