@@ -48,6 +48,7 @@ class Home extends Component {
     return (
       <div>
         <div id="profile">
+          <div id="background"></div>
           <div id="mainBoxes">
             <div id="groupBox">
               <div className="sub-header" style={{width:"8em",marginBottom:"10px",fontSize:"6vmin"}}><b>Lending Groups</b></div>

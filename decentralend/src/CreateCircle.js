@@ -28,7 +28,7 @@ class CreateCircle extends Component {
       this.state.loading = false
     })
     event.preventDefault()
-    window.location.href = "#/profile"
+    window.location = "#/profile"
   }
 
   render() {
