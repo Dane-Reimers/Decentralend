@@ -21,6 +21,7 @@ class ViewGroup extends Component {
     componentWillMount() {
         this.setState({setGroupCalled: true});
         this.setGroup().then(() =>
+        this.setGroupName(),
         this.setMemberAddresses(),
         this.setMembers(),
         this.setMemberRequests()
@@ -30,6 +31,11 @@ class ViewGroup extends Component {
     async setMemberAddresses() {
         const addresses = await this.state.lendingGroup.methods.getMemberAddresses().call()
         this.setState({memAddresses: addresses})
+    }
+
+    async setGroupName() {
+        const _name = await this.state.lendingGroup.methods.name().call();
+        this.setState({name: _name})
     }
 
     async setGroup() {

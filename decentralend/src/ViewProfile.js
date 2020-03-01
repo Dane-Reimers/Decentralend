@@ -11,7 +11,8 @@ class Home extends Component {
     super(props);
     this.state = {
       groups: [],
-      setGroupsCalled: false
+      setGroupsCalled: false,
+      totalBalance = -1337
     };
   }
 
@@ -28,6 +29,9 @@ class Home extends Component {
       const inGroup = await this.inGroup(group)
       if (inGroup) {
         const groupName = await group.methods.name().call()
+        const _balance = await group.methods.getBalance(this.props.account);
+        let newBalance = _balance + this.state.balance;
+        this.setState({balace: newBalance});
         group.name = groupName
         const prevGroups = this.state.groups
         this.setState({groups: [...prevGroups, group]})
