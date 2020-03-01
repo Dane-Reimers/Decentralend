@@ -9,6 +9,7 @@ class ViewGroup extends Component {
         this.requests = [];
         this.members = [];
         this.memAddresses = [];
+        this.name = "";
     
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -47,11 +48,7 @@ class ViewGroup extends Component {
 
       async handleRequest(amount) {
           console.log(this.props.lendingGroup);
-          this.props.lendingGroup.methods.requestMoney(amount).send({from: this.props.account, gas: 100000})
-          .once('receipt', (receipt)
-          => {
-              console.log(receipt)
-          })
+          this.props.lendingGroup.methods.requestMoney(amount).send({from: this.props.account, gas: 100000});
           event.preventDefault()
       }
 
@@ -63,7 +60,17 @@ class ViewGroup extends Component {
               gas: 100000
           })
       }
-    
+
+      createList (_list) {
+          ul = document.createElement('ul');
+          document.getElementById('myItemList').appendChild(ul);
+
+          for (let id = 0; id < _list.length; id++) {
+            let li = document.createElement('li');
+            ul.appendChild(li);
+            li.innerHTML += _list[id];
+          }
+      }    
 
     render() {
         return (
