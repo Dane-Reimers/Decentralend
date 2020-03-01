@@ -243,9 +243,59 @@ input {
   font-size: 3vmin;
 }
 
+.listElem {
+  padding-left:.5em;
+  text-decoration: none;
+  color: #60a8a0;
+  font-size: 3vmin;
+}
+
 .group:hover {
   color: #3f5685;
   cursor: pointer;
+}
+
+.groupHeader {
+  color: white;
+  font-size: 8vmin;
+  font-family: Roboto;
+  text-align: center;
+  padding: 15px;
+  background-color: #60a8a0;
+}
+
+#groupData {
+  display: grid;
+  background-color: #60a8a0;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+
+.groupList {
+  background-color:white;
+  margin:15px;
+  padding:20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+#memberList {
+  grid-area: 1 / 1 / 3 / 4;
+
+}
+
+#requestList {
+  grid-area: 1 / 4 / 3 / 7; 
+}
+
+#addMember {
+  grid-area: 3 / 1 / 7 / 4;
+}
+
+#manageRequests {
+  grid-area: 3 / 4 / 7 / 7;
 }
 
 .App-link {
