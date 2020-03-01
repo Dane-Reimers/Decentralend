@@ -8,8 +8,7 @@ class Member {
     }
 
     toString() {
-        let outRequest = (this.request != null && this.request.amountRequested > 0) ? 'has an outstanding request' : 'Does not have a request';
-        return (this.name + ', ' + this.balance.toString() + ', ' + outRequest);
+        return (this.name + '\'s balance: ' + this.balance.toString());
     }
 }
 

@@ -13,9 +13,12 @@ class ViewGroup extends Component {
             members: [],
             memAddresses: [],
             name: "",
-            setGroupCalled: false
+            setGroupCalled: false,
+            requestAmount: 0
         }
 
+        this.handleChange = this.handleChange.bind(this);
+        this.handleRequest = this.handleRequest.bind(this);
     }
 
     componentWillMount() {
@@ -61,17 +64,25 @@ class ViewGroup extends Component {
     async setMemberRequests() {
         let requests = []
         for (let id = 0; id < this.state.memAddresses.length; id++) {
-            let requestTuple = await this.state.lendingGroup.methods.getRequest(this.state.memAddresses[id]).call();
-
-            let request = new Request(requestTuple[0], requestTuple[1]);
-            this.state.members[id].request = request;
-            requests.push(request);
+            const memAddress = this.state.memAddresses[id]
+            const requestTuple = await this.state.lendingGroup.methods.getRequest(memAddress).call()
+            if (requestTuple[0] != 0) {
+                const requestor = await this.state.lendingGroup.methods.getMember(memAddress).call()
+                console.log(requestor)
+                const request = new Request(requestor[0], requestTuple[0], requestTuple[1])
+                this.state.members[id].request = request
+                requests.push(request)
+            }
         }
         this.setState({requests: requests})
     }
 
-    async handleRequest(amount) {
+    async handleRequest(event) {
+        event.preventDefault()
+        const amount = this.state.requestAmount
+        console.log(amount)
         this.state.lendingGroup.methods.requestMoney(amount).send({ from: this.props.account, gas: 100000 });
+        this.setState({requestAmount: 0})
     }
 
     async handleDonate(member, amount) {
@@ -86,6 +97,10 @@ class ViewGroup extends Component {
         await this.state.lendingGroup.methods.addMember(memberAddress, name);
     }
 
+    handleChange(event) {
+        this.setState({[event.target.name]: event.target.value})
+    }
+
     render() {
         return (<div>
             <div id="profile">
@@ -95,10 +110,27 @@ class ViewGroup extends Component {
                 {this.state.members.map(function(member, idx){
                 return (
                     <div key={idx}>
-                    <h2>{member.toString()}</h2>
+                        <h2>{member.toString()}</h2>
                     </div>
                 )})}
-            </div>
+              </div>
+              <div>
+                {this.state.requests.map(function(request, idx){
+                return (
+                    <div key={idx}>
+                        <h2>{request.toString()}</h2>
+                    </div>
+                )})}
+              </div>
+              <div>
+                <form onSubmit={this.handleRequest}>
+                    <label>
+                    <input name="requestAmount" type="number" placeholder="Group name..." value={this.state.requestAmount} onChange={this.handleChange}/>
+                    </label>
+                    <br/>
+                    <input id="submit" type="submit" value="Submit"/>
+                </form>
+              </div>
             </div>
           </div>
         );
