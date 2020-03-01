@@ -177,7 +177,7 @@ class ViewGroup extends Component {
                         <form onSubmit={this.handleDonate}>
                             <label>
                             <Select name="requestOption" options={this.state.requestOptions} onChange={this.handleSelectChange}
-                                value={this.state.requestOption} placeholder="Select a recipiant"/>
+                                value={this.state.requestOption} placeholder="Select a recipient"/>
                             </label>
                             <br/>
                             <label>
