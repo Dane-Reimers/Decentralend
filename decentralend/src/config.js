@@ -156,6 +156,27 @@ export const LENDING_GROUP_ABI = [
       "inputs": [
         {
           "internalType": "address",
+          "name": "member",
+          "type": "address"
+        }
+      ],
+      "name": "getBalance",
+      "outputs": [
+        {
+          "internalType": "int256",
+          "name": "",
+          "type": "int256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [
+        {
+          "internalType": "address",
           "name": "memberAdd",
           "type": "address"
         }
