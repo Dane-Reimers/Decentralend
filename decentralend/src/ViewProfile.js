@@ -15,7 +15,7 @@ class Home extends Component {
     };
   }
 
-  componentWillReceiveProps() {
+  componentDidUpdate() {
     if (this.props.lendingGroupManager !== undefined &&
         this.props.account !== undefined &&
         !this.state.setGroupsCalled)
