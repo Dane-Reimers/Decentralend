@@ -32,7 +32,7 @@ class Home extends Component {
       const group = new this.props.web3.eth.Contract(LENDING_GROUP_ABI, groupAddress)
       const inGroup = await this.inGroup(group)
       if (inGroup) {
-        const groupName = await group.methods.name()
+        const groupName = await group.methods.name().call()
         group.name = groupName
         const prevGroups = this.state.groups
         this.setState({groups: [...prevGroups, group]})
@@ -54,7 +54,7 @@ class Home extends Component {
           {this.state.groups.map(function(group, idx){
           return (
             <div key={idx}>
-              <NavLink className="nav" to="/group">Group</NavLink>
+              <NavLink className="nav" to="/group">{ group.name }</NavLink>
               <Route exact path="/group" render={props =>
                   <ViewGroup group={group} {...props} />
                 }
