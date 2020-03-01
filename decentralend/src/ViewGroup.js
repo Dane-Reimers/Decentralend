@@ -19,7 +19,7 @@ class ViewGroup extends Component {
     }
 
     componentWillMount() {
-        this.setState({setGroupCalled: true});
+        this.setState({setGroupCalled: true})
         this.setGroup().then(() =>
         this.setMemberAddresses().then(() => 
         this.setMembers().then(() => 
@@ -34,7 +34,6 @@ class ViewGroup extends Component {
 
     async setMemberAddresses() {
         const addresses = await this.state.lendingGroup.methods.getMemberAddresses().call()
-        console.log(addresses)
         this.setState({memAddresses: addresses})
     }
 
@@ -47,32 +46,31 @@ class ViewGroup extends Component {
     async setMembers() {
         let members = []
         for (let id = 0; id < this.state.memAddresses.length; id++) {
-            let memberTuple = await this.state.lendingGroup.methods.getMember(this.memAddresses[id]).call();
+            let memberTuple = await this.state.lendingGroup.methods.getMember(this.state.memAddresses[id]).call();
             var member = new Member(memberTuple[0], memberTuple[1]);
             members.push(member)
         }
-        console.log(members)
         this.setState({members})
     }
 
     async setMemberRequests() {
         let requests = []
         for (let id = 0; id < this.state.memAddresses.length; id++) {
-            let requestTuple = await this.props.lendingGroup.methods.getRequest(this.state.memAddresses[id]).call();
+            let requestTuple = await this.state.lendingGroup.methods.getRequest(this.state.memAddresses[id]).call();
 
             let request = new Request(requestTuple[0], requestTuple[1]);
-            this.state.member[id].request = request;
+            this.state.members[id].request = request;
             requests.push(request);
         }
         this.setState({requests: requests})
     }
 
     async handleRequest(amount) {
-        this.props.lendingGroup.methods.requestMoney(amount).send({ from: this.props.account, gas: 100000 });
+        this.state.lendingGroup.methods.requestMoney(amount).send({ from: this.props.account, gas: 100000 });
     }
 
     async handleDonate(member, amount) {
-        this.props.lendingGroup.methods.giveMoney(member).send({
+        this.state.lendingGroup.methods.giveMoney(member).send({
             from: this.props.account,
             value: amount,
             gas: 100000
