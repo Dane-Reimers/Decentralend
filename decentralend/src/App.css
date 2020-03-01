@@ -77,6 +77,12 @@
   z-index: 2;
 }
 
+#essayFormat {
+  width: 80%;
+  text-align: center;
+  font-size: 14px;
+  font-family: Roboto;
+}
 .backgroundImg {
   width: 100%;
   grid-area: 1 / 1 / 10 / 6;
@@ -113,9 +119,21 @@
   padding: 100px;
   padding-top:50px;
   position: absolute;
+  text-align: center;
   color: #2e3338;
-  font-size: 8vmin;
+  font-size: 4vmin;
   font-family: Roboto, sans-serif;
+}
+
+#mission-header {
+  text-align: center;
+  font-size: 8vmin;
+}
+
+#mission-subheader {
+  font-size: 6vmin;
+  padding-top:20px;
+  padding-bottom:20px;
 }
 
 .sub-header {
