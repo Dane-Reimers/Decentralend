@@ -85,5 +85,5 @@ contract LendingGroup {
   function pay(address payable receiver, uint256 amt) private {
     members[receiver].balance -= int256(amt);
     receiver.transfer(amt);
-  }  
+  }
 }

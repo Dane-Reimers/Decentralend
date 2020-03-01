@@ -11,6 +11,7 @@ import Home from './Home';
 import CreateCircle from './CreateCircle';
 import logo from './full_logo.png';
 import ViewProfile from './ViewProfile';
+import ViewGroup from './ViewGroup';
 
 class App extends Component {
   componentDidMount() {
@@ -60,7 +61,12 @@ class App extends Component {
               }
             />
             <Route exact path="/profile" render={props =>
+                this.state.lendingGroupManager && 
                 <ViewProfile lendingGroupManager={this.state.lendingGroupManager} web3={this.state.web3} account={this.state.account} {...props} />
+              }
+            />
+            <Route exact path="/group/:address" render={props =>
+                <ViewGroup web3={this.state.web3} account={this.state.account} {...props} />
               }
             />
           </div>
