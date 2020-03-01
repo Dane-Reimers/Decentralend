@@ -28,6 +28,7 @@ class CreateCircle extends Component {
       this.state.loading = false
     })
     event.preventDefault()
+    window.open("#/profile");
   }
 
   render() {
