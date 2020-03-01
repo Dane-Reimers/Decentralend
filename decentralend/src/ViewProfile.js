@@ -13,7 +13,7 @@ class Home extends Component {
     this.state = {
       groups: [],
       setGroupsCalled: false,
-      totalBalance = -1337
+      totalBalance : -1337
     };
   }
 
