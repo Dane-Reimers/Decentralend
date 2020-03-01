@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import {
   Route,
-  HashRouter,
   NavLink,
 } from "react-router-dom";
 import { LENDING_GROUP_ABI } from "./config";
+import ViewGroup from "./ViewGroup"
  
 class Home extends Component {
   constructor(props) {
