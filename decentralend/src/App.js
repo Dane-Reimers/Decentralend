@@ -19,8 +19,8 @@ class App extends Component {
   }
 
   async loadBlockchainData() {
-    //const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
-    const web3 = new Web3("http://localhost:8545")
+    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
+    //const web3 = new Web3("http://localhost:8545")
     this.setState({ web3 })
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
