@@ -12,6 +12,7 @@ class Home extends Component {
     super(props);
     this.state = {
       groups: [],
+      balanceByGroup: [],
       setGroupsCalled: false,
       totalBalance : 0
     };
@@ -34,7 +35,10 @@ class Home extends Component {
         let newBalance = _balance + this.state.balance;
         this.setState({balace: newBalance});
         group.name = groupName
+        const groupBalString = 'You have a balance of: ' + _balance.toString() + ' in the group: ' + groupName;
+        const prevGroupBalString = this.state.balanceByGroup;
         const prevGroups = this.state.groups
+        this.setState({balanceByGroup: [...prevGroupBalString, groupBalString]})
         this.setState({groups: [...prevGroups, group]})
       }
     }
