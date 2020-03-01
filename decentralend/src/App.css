@@ -48,6 +48,7 @@
   z-index: 0;
   width: 100%;
   opacity:8%;
+  overflow:hidden;
 }
 
 .nav {
@@ -109,10 +110,67 @@
 #mission {
   z-index: 1;
   top: 10px;
+  padding: 100px;
+  padding-top:50px;
   position: absolute;
   color: #2e3338;
   font-size: 8vmin;
   font-family: Roboto, sans-serif;
+}
+
+.sub-header {
+  color: #3f5685;
+  font-size: 5vmin;
+  font-family: Roboto;
+}
+
+#makeGroup {
+  height: 80vh;
+  overflow: hidden;
+}
+
+#groupForm {
+  z-index: 1;
+  position: absolute;
+  display: flex;
+  top: 0px;
+  left: 50%;
+  margin-left: -200px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top:8vh;
+}
+
+input {
+  width: 300px;
+  padding:10px;
+  margin-top: 20px;
+  font-size: 3vmin;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 2px solid #3f5685;
+}
+
+#submit {
+  background-color: #3f5685;
+  color: white;
+}
+
+#submit:hover{
+  background-color: #60a8a0;
+  cursor: pointer;
+}
+
+#profile {
+  margin-left:100px;
+  margin-top:30px;
+}
+
+#accName {
+  padding-top:10px;
+  color: #3f5685;
+  font-size: 3vmin;
 }
 
 .App-link {

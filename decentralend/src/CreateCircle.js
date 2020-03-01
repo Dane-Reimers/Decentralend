@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import logo from './part_logo.png';
  
 class CreateCircle extends Component {
   constructor(props) {
@@ -31,24 +32,23 @@ class CreateCircle extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Group Name:
-          <br/>
-          <input name="groupName" type="text" value={this.state.groupName} onChange={this.handleChange}/>
-        </label>
-        <br/>
-        <br/>
-
-        <label>
-          Your Name:
-          <br/>
-          <input name="username" type="text" value={this.state.username} onChange={this.handleChange}/>
-        </label>
-        <br/>
-
-        <input type="submit" value="Submit"/>
-      </form>
+      <div style={{position:"relative"}} id="makeGroup">
+        <img src={logo} alt="" className="bigLogo"/>
+        <div id="groupForm">
+          <div className="sub-header"><b>Create a new lending group</b></div>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              <input name="groupName" type="text" placeholder="Group name..." value={this.state.groupName} onChange={this.handleChange}/>
+            </label>
+            <br/>
+            <label>
+            <input name="username" type="text" placeholder="Your name..." value={this.state.username} onChange={this.handleChange}/>
+            </label>
+            <br/>
+            <input id="submit" type="submit" value="Submit"/>
+          </form>
+        </div>
+      </div>
     );
   }
 }

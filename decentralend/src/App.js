@@ -47,7 +47,7 @@ class App extends Component {
             <div style={{flexGrow:1}}></div>
             <div className="navBar">
               <NavLink className="nav" to="/">Home</NavLink>
-              <NavLink className="nav" to="/create-circle">Create Circle</NavLink>
+              <NavLink className="nav" to="/create-group">Create Group</NavLink>
               <NavLink className="nav" to="/profile">Profile</NavLink>
             </div>
           </div>
@@ -56,7 +56,7 @@ class App extends Component {
                 <Home numGroups={this.state.numGroups} {...props} />
               }
             />
-            <Route exact path="/create-circle" render={props =>
+            <Route exact path="/create-group" render={props =>
                 <CreateCircle lendingGroupManager={this.state.lendingGroupManager} account={this.state.account} {...props} />
               }
             />
