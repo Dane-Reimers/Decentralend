@@ -158,7 +158,8 @@ class ViewGroup extends Component {
                 <h3>Add Request:</h3>
                 <form onSubmit={this.handleRequest}>
                     <label>
-                    <input name="requestAmount" type="number" placeholder="Group name..." value={this.state.requestAmount} onChange={this.handleChange}/>
+                    <input name="addRequestAmount" type="number" placeholder="Request amount..."
+                        value={this.state.addRequestAmount} onChange={this.handleChange}/>
                     </label>
                     <br/>
                     <input id="submit" type="submit" value="Submit"/>
