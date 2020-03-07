@@ -9,6 +9,7 @@ import './App.css';
 import { LENDING_GROUP_MANAGER_ABI, LENDING_GROUP_MANAGER_ADDRESS } from './config';
 import Home from './Home';
 import CreateCircle from './CreateCircle';
+import Carbon from './Carbon';
 import logo from './full_logo.png';
 import ViewProfile from './ViewProfile';
 import ViewGroup from './ViewGroup';
@@ -19,7 +20,7 @@ class App extends Component {
   }
 
   async loadBlockchainData() {
-    const web3 = new Web3(Web3.givenProvider || "http://localhost:8545")
+    const web3 = new Web3(Web3.givenProvider)
     //const web3 = new Web3("http://localhost:8545")
     this.setState({ web3 })
     const accounts = await web3.eth.getAccounts()
@@ -49,6 +50,7 @@ class App extends Component {
               <NavLink className="nav" to="/">Home</NavLink>
               <NavLink className="nav" to="/create-group">Create Group</NavLink>
               <NavLink className="nav" to="/profile">Profile</NavLink>
+              <NavLink className="nav" to="/carbon">Buy Eth</NavLink>
             </div>
           </div>
           <div className="content">
@@ -70,9 +72,17 @@ class App extends Component {
                 <ViewGroup web3={this.state.web3} account={this.state.account} {...props} />
               }
             />
+            <Route exact path="/carbon" render={props => 
+                this.state.web3 && this.state.account &&
+              <Carbon web3={this.state.web3} account={this.state.account} {... props} />
+            }
+            />
           </div>
         </div>
-
+        
+<script src="/__/firebase/7.9.3/firebase-app.js"></script>
+<script src="/__/firebase/7.9.3/firebase-analytics.js"></script>
+<script src="/__/firebase/init.js"></script>
       </HashRouter>
     );
   }

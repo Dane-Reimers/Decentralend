@@ -22,6 +22,7 @@ class Home extends Component {
           <h3>There are { this.props.numGroups } group(s)</h3>
         </div>
       </div>
+
     );
   }
 }

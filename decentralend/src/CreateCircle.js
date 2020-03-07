@@ -32,6 +32,7 @@ class CreateCircle extends Component {
 
   render() {
     return (
+      <div>
       <div style={{position:"relative"}} id="makeGroup">
         <img src={logo} alt="" className="bigLogo"/>
         <div id="groupForm">
@@ -47,7 +48,10 @@ class CreateCircle extends Component {
             <br/>
             <input id="submit" type="submit" value="Submit"/>
           </form>
-        </div>
+      <div>
+      </div>    
+      </div>
+      </div>
       </div>
     );
   }

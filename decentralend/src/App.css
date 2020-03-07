@@ -170,14 +170,74 @@ input {
   border: 2px solid #3f5685;
 }
 
+#iframe {
+  overflow: hidden;
+}
+
+#centered {
+  width: 100%;
+  text-align: center;
+  overflow: hidden;
+}
 #submit {
   background-color: #3f5685;
+  position: relative;
   color: white;
 }
 
 #submit:hover{
   background-color: #60a8a0;
   cursor: pointer;
+}
+
+#submit:active{
+  background-color: #2e3338;
+}
+
+.box {
+  position: relative;
+  height: 200px;
+  background: #0bf;
+}
+.title1,
+.title2 {
+  transition: 0.3s;
+}
+.title2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* HIDE SECOND TITLE */
+  opacity: 0;
+}
+
+/* WHEN BOX IS HOVERED SWAP TITLES */
+.box:hover .title1 {
+  opacity: 0;
+}
+.box:hover .title2 {
+  opacity: 1;
+}
+
+@keyframes bounce { 
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50px); }
+}
+
+#ball{
+  background: #f45342;
+  position:"center";
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  margin: 80px auto 0 auto;
+}
+
+#ball:hover{
+  animation: bounce 0.8s;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
 }
 
 #profile {
