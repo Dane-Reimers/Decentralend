@@ -39,7 +39,7 @@ class ViewGroup extends Component {
         this.setMemberRequests().then(() => 
         this.setGroupName()))))
       }
-
+    
     async setGroupName() {
         const groupName = await this.state.lendingGroup.methods.name().call()
         this.setState({groupName: groupName})

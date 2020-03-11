@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import background_img from './prefumo_canyon.jpg';
-import logo from './part_logo.png';
+import logo from './Bob_ross.jpg';
  
 class Home extends Component {
   render() {

@@ -1,4 +1,4 @@
-pragma solidity ^0.5.0;
+pragma solidity >0.5.0;
 
 
 contract LendingGroup {
@@ -54,7 +54,12 @@ contract LendingGroup {
     return bytes(members[questionable].name).length > 0;
   }
 
+  function isOwner() public view returns (bool) {
+    return msg.sender == owner;
+  }
+
   function addMember (address _memberAddress, string memory _name) public {
+    require (msg.sender == owner, "You must be the admin of this group");
     memberAddress.push(_memberAddress);
     members[_memberAddress] = Member(_name, 0);
     requests[_memberAddress] = Request(0, 0);
